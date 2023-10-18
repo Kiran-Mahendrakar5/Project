@@ -27,7 +27,7 @@ public class LandRecordsController {
 			model.addAttribute("save", dto);
 			return "Home";
 		} else {
-			return "Home";
+			return "Index";
 		}
 
 	}
@@ -36,13 +36,15 @@ public class LandRecordsController {
 	public String generateOtp(@RequestParam String email, Model model) {
 		System.out.println(email);
 		boolean result = service.signIn(email, model);
+		model.addAttribute("EmailV", email);
 		if (result) {
+
 			System.out.println("account verified");
 			return "Home";
 
 		}
 		System.out.println("email is not found");
-		model.addAttribute("emailNotExist", "email is not valid");
+		model.addAttribute("emailNotExist", "Email Is Not Valid");
 		return "Home";
 
 	}
@@ -50,32 +52,83 @@ public class LandRecordsController {
 	@RequestMapping(value = "/checkOtp", method = RequestMethod.POST)
 	public String otpValidator(@RequestParam String otp, Model model) {
 		LandRecordsDto dto = service.otpValidator(otp, model);
+		System.out.println(dto);
 		if (dto != null) {
 			System.out.println("Otp is verified");
-			model.addAttribute("dto", dto);
-			return "Details";
+			model.addAttribute("otp", otp);
+
+			return "AddResolver";
+		} else {
+			return "Home";
 		}
-		return "Home";
 
 	}
 
 	@RequestMapping(value = "/savingrec", method = RequestMethod.POST)
 	public String saveRecord(LandRecordsDtoOne dto, Model model) {
+		System.out.println(dto);
 		boolean save = service.saveRecords(dto, model);
+
 		if (save) {
 			model.addAttribute("savee", dto);
+			System.out.println("Entering to save");
 			return "Success";
 		} else {
+			System.out.println("Entering to else");
 			return "Add";
 		}
 
 	}
+
 	@RequestMapping(value = "/readd", method = RequestMethod.GET)
-	public String readSongs(LandRecordsDtoOne dto,Model model) {
-		List<LandRecordsDtoOne>  list = service.readAll();
+	public String readSongs(LandRecordsDtoOne dto, Model model) {
+		List<LandRecordsDtoOne> list = service.readAll();
 		model.addAttribute("read", list);
 		System.out.println(list);
-		return "Read";
+		return "OneRead";
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String Deleteserve(@RequestParam String serveNumber, Model model) {
+		boolean delete = service.deleteByserveNumber(serveNumber);
+		if (delete) {
+			model.addAttribute("serv", "DELETED SUCCEFULLY");
+			return "Delete";
+		} else {
+			model.addAttribute("ser", "Check Serve Number OR INVALID");
+			return "Delete";
+		}
+
+	}
+
+	@RequestMapping(value = "/find", method = RequestMethod.POST)
+	public String Findvillage(@RequestParam String village, Model model) {
+		List<LandRecordsDtoOne>finded =  service.findByvillage(village);
+		if (finded != null) {
+			model.addAttribute("vill", finded);
+			return "OneRead";
+		} else {
+			model.addAttribute("Vil", "Village.........INVALID");
+			return "OneRead";
+		}
+
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String update(@RequestParam String ownerName, @RequestParam String mobileNumber,
+			@RequestParam String aadharNumber, @RequestParam String year, @RequestParam String hissaNumber,
+			@RequestParam String serveNumber, Model model) {
+		boolean update = service.updateByHissaNumberAndSurveyNumber(ownerName, mobileNumber, aadharNumber, year,
+				hissaNumber, serveNumber);
+		if (update) {
+			model.addAttribute("upd", "Update Succefully");
+			return "Update";
+
+		} else {
+			model.addAttribute("upda", "Not.......Updated");
+			return "Update";
+		}
+
 	}
 
 }

@@ -1,7 +1,17 @@
 package com.xworkz.landrecords.service;
 
 import java.util.List;
+import java.util.Properties;
 import java.util.SplittableRandom;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,12 +49,12 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 		boolean isValid = true;
 		if (dto != null) {
 			if (dto.getAdminName() == null || dto.getAdminName().length() <= 3) {
-				model.addAttribute("AdminName", "AdminName is not validate");
+				model.addAttribute("AdminName", "AdminName is not validate!!!");
 				System.out.println("AdminName is not valid");
 				isValid = false;
 			}
 			if (dto.getEmail() == null || dto.getEmail().length() <= 3) {
-				model.addAttribute("Email", "Email is not validate");
+				model.addAttribute("Email", "Email is not validate!!!");
 				System.out.println("Email is not valid");
 				isValid = false;
 			}
@@ -75,7 +85,7 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 			}
 
 		}
-		model.addAttribute("emailnotvalidated", "email is not valid");
+		model.addAttribute("emailnotvalidated", "Email Is Not Valid");
 		return null;
 	}
 
@@ -83,6 +93,7 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 	public String generateOtp() {
 		int randomNumber = (int) ((Math.random() * 90000) + 1000);
 		String otp = String.valueOf(randomNumber);
+//		
 		return otp;
 	}
 
@@ -92,8 +103,11 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 			LandRecordsDto dto = findByEmail(email, model);
 			if (dto != null) {
 				String otp = generateOtp();
+				model.addAttribute("otpView", otp);
+				System.out.println("otp is a otp " + otp);
 				boolean update = repo.updateOtpByEmail(otp, email);
 				System.out.println(update);
+				boolean sender = senderOtp(otp, email, model);
 				return true;
 
 			}
@@ -108,9 +122,11 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 	public LandRecordsDto otpValidator(String otp, Model model) {
 		try {
 			LandRecordsDto dto = repo.findOtp(otp);
-			System.out.println(dto);
+			System.out.println("this is otp validator in service");
+
 			return dto;
 		} catch (Exception e) {
+			System.out.println("this is otp validator in service");
 			System.out.println("Otp is Incorrect");
 			model.addAttribute("otpValidated", "Otp is Incorrect");
 			return null;
@@ -137,9 +153,9 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 				model.addAttribute("Taluk", "Enter Taluk");
 				valid = false;
 			}
-			if (dto.getHobli() == null || dto.getHobli().isEmpty()) {
-				System.out.println("Enter Hobli");
-				model.addAttribute("Hobli", "Enter Hobli");
+			if (dto.getPost() == null || dto.getPost().isEmpty()) {
+				System.out.println("Enter Post");
+				model.addAttribute("Post", "Enter Post");
 				valid = false;
 			}
 			if (dto.getVillage() == null || dto.getVillage().isEmpty()) {
@@ -152,7 +168,8 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 				model.addAttribute("OwnerName", "Enter Owner name && owner name is invalid");
 				valid = false;
 			}
-			if (dto.getMobileNumber() == null || dto.getMobileNumber().isEmpty()) {
+			if (dto.getMobileNumber() == null || dto.getMobileNumber().isEmpty()
+					|| dto.getMobileNumber().length() <= 9) {
 				System.out.println("Enter Mobile Number or Mobile Number is invalid");
 				model.addAttribute("MobileNumber", "Enter Mobile Number or Mobile Number is invalid");
 				valid = false;
@@ -162,14 +179,14 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 				model.addAttribute("AadharNumber", "Enter Aadhar Number or Aadhar number is invalid");
 				valid = false;
 			}
-			if (dto.getServeNumber() == null || dto.getServeNumber().isEmpty()) {
-				System.out.println("Enter Servey Number");
-				model.addAttribute("SurveNumber", "Enter Servey Number");
+			if (dto.getHissaNumber() == null || dto.getHissaNumber().isEmpty()) {
+//				System.out.println("Enter Hissa Number");
+				model.addAttribute("HissaNumber", "Enter Hissa Number");
 				valid = false;
 			}
-			if (dto.getHissaNumber() == null || dto.getHissaNumber().isEmpty()) {
-				System.out.println("Enter Hissa Number");
-				model.addAttribute("HissaNumber", "Enter Hissa Number");
+			if (dto.getServeNumber() == null || dto.getServeNumber().isEmpty()) {
+//				System.out.println("Enter Servey Number");
+				model.addAttribute("SurveNumber", "Enter Servey Number");
 				valid = false;
 			}
 			if (dto.getYear() == null || dto.getYear().isEmpty()) {
@@ -182,6 +199,7 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 			System.out.println("dto is valid ......saving");
 			valid = false;
 		}
+		System.out.println("valid");
 		return valid;
 	}
 
@@ -198,4 +216,113 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 	public List<LandRecordsDtoOne> readAll() {
 		return repo.readAll();
 	}
+
+	@Override
+	public boolean senderOtp(String otp, String Email, Model model) {
+
+		String senderEmail = "kiranms.xworkz@outlook.com";
+		String senderPassword = "Kiran@28";
+		String recipientEmail = Email;
+		String subject = "Your OTP Code";
+		String messageText = "Your OTP code is: " + otp + "vaild for only 10 mits ";
+		System.out.println(otp);
+
+		// Set up JavaMail properties
+		Properties properties = new Properties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", "smtp.office365.com");// Simple Mail Transfer Protocol
+		properties.put("mail.smtp.port", "587");
+
+		// Create a session with authentication
+		Session session = Session.getInstance(properties, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(senderEmail, senderPassword);
+			}
+		});
+
+		try {
+			// Create a MimeMessage object
+			Message message = new MimeMessage(session);
+
+			// Set the sender, recipient, subject, and message body
+			message.setFrom(new InternetAddress(senderEmail));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+			message.setSubject(subject);
+			message.setText(messageText);
+
+			// Send the email
+			Transport.send(message);
+
+			System.out.println("OTP email sent successfully!");
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
+		return true;
+
+	}
+
+	@Override
+	public boolean deleteByserveNumber(String serveNumber) {
+		if (serveNumber != null && !serveNumber.isEmpty()) {
+			return repo.deleteByserveNumber(serveNumber);
+
+		}
+		System.out.println("from service impl false");
+		return false;
+	}
+
+	@Override
+	public List<LandRecordsDtoOne> findByvillage(String village) {
+		if (village != null && !village.isEmpty()) {
+			try {
+				List<LandRecordsDtoOne>	  dtos=repo.findByvillage(village);
+				System.out.println(dtos);
+				return dtos;
+			} catch (Exception e) {
+				System.out.println("catch block find bt village");
+				return null;
+			}
+		}
+		System.out.println("not finded service impl false");
+		return null;
+	}
+
+	@Override
+	public boolean updateByHissaNumberAndSurveyNumber(String ownerName, String mobileNumber, String aadharNumber,
+			String year, String hissaNumber, String serveNumber) {
+		if (ownerName != null || !ownerName.isEmpty()) {
+			if (mobileNumber != null || !mobileNumber.isEmpty()) {
+				if (aadharNumber != null || !aadharNumber.isEmpty()) {
+					if (year != null || !year.isEmpty()) {
+						if (hissaNumber != null || !hissaNumber.isEmpty()) {
+							if (serveNumber != null || !serveNumber.isEmpty()) {
+								System.out.println("successfully updated");
+								return repo.updateByHissaNumberAndSurveyNumber(ownerName, mobileNumber, aadharNumber,
+										year, hissaNumber, serveNumber);
+
+							}
+							System.out.println("serveNumber false");
+							return false;
+
+						}
+						System.out.println("hissaNumber false");
+						return false;
+
+					}
+					System.out.println("year false");
+					return false;
+				}
+				System.out.println("aadharNumber false");
+				return false;
+			}
+			System.out.println("mobileNumber false");
+			return false;
+
+		}
+		System.out.println("ownerName false");
+		return false;
+	}
+
 }

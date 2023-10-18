@@ -5,6 +5,8 @@ import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -67,8 +69,10 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<LandRecordsDto> quary = em.createNamedQuery("findOtp", LandRecordsDto.class);
+		System.out.println("this is otp validator in repo");
 		quary.setParameter("ot", otp);
 		LandRecordsDto dto = quary.getSingleResult();
+
 		return dto;
 	}
 
@@ -76,7 +80,9 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 	public boolean saveRecords(LandRecordsDtoOne dto) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
+		System.out.println("going to saveRecords");
 		em.persist(dto);
+		System.out.println("savedRecords");
 		em.getTransaction().commit();
 		return true;
 	}
@@ -88,6 +94,54 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 		List<LandRecordsDtoOne> read = query.getResultList();
 		System.out.println(read);
 		return read;
+	}
+
+	@Override
+	public boolean deleteByserveNumber(String serveNumber) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Query query = em.createNamedQuery("Deleteserve");
+		query.setParameter("dt", serveNumber);
+		query.executeUpdate();
+		try {
+			em.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			em.close();
+		}
+
+	}
+
+	@Override
+	public List<LandRecordsDtoOne> findByvillage(String village) throws NoResultException, NonUniqueResultException{
+		EntityManager em = emf.createEntityManager();
+		
+		TypedQuery<LandRecordsDtoOne> query = em.createNamedQuery("findByvillage", LandRecordsDtoOne.class);
+		query.setParameter("vi", village);
+		List<LandRecordsDtoOne> dto = query.getResultList();
+		return dto;
+	}
+
+	@Override
+	public boolean updateByHissaNumberAndSurveyNumber(String ownerName, String mobileNumber, String aadharNumber,
+			String year, String hissaNumber, String serveNumber) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Query query = em.createNamedQuery("updateByHissaNAndSurveyN");
+		query.setParameter("onum", ownerName);
+		query.setParameter("mnum", mobileNumber);
+		query.setParameter("aanum", aadharNumber);
+		query.setParameter("ye", year);
+		query.setParameter("hnum", hissaNumber);
+		query.setParameter("sernum", serveNumber);
+		query.executeUpdate();
+		em.getTransaction().commit();
+		return true;
+
 	}
 
 }

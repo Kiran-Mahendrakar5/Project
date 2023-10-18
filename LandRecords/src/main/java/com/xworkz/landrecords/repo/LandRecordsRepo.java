@@ -20,5 +20,12 @@ public interface LandRecordsRepo {
 	public boolean saveRecords(LandRecordsDtoOne dto);
 	
 	public List<LandRecordsDtoOne> readAll();
+	
+	public boolean deleteByserveNumber(String serveNumber);
+	
+	public List<LandRecordsDtoOne> findByvillage(String village);
+	
+	public boolean updateByHissaNumberAndSurveyNumber(String ownerName,String mobileNumber,String aadharNumber,
+			String year,String hissaNumber,String serveNumber);
 
 }

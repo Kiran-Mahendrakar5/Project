@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Success</title>
+<title>ADD RESOLVER</title>
 <style type="text/css">
+a:link, a:visited {
+	background-color: #FF7518;
+	color: white;
+	padding: 14px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+
+a:hover, a:active {
+	background-color: orange;
+}
 body {
 	background-image: radial-gradient(circle at 30% 86%, rgba(255, 255, 255, 0.03)
 		0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
@@ -39,10 +51,81 @@ body {
 	min-height: 100vh;
 }
 
+.main {
+	width: 100%;
+	background-position: center;
+	background-size: cover;
+	height: 100vh;
+}
+
+.icon {
+	width: 200px;
+	float: left;
+	height: 70px;
+}
+
+.menu {
+	width: 400px;
+	float: left;
+	height: 70px;
+	padding-left: -400px;
+}
+
+.navbar {
+	width: 1200px;
+	height: 75px;
+	margin: auto;
+}
+
+ul {
+	float: left;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+ul li {
+	list-style: none;
+	margin-left: 62px;
+	margin-top: 27px;
+	font-size: 14px;
+}
+
+ul li a {
+	text-decoration: none;
+	color: #fff;
+	font-family: Arial;
+	font-weight: bold;
+	transition: 0.4s ease-in-out;
+}
+
+ul li a:hover {
+	color: #ff7200;
+}
 </style>
 </head>
-<body>
-<h1>SUCCESSFULLY LOGIN</h1>
 
+<body>
+	<div class="main">
+		<div class="navbar">
+			<div class="icon"></div>
+
+			<div class="menu">
+				<ul>
+
+
+					<li><a class="navbar-brand" id="ADDRECORDS" href="Add.jsp">ADDRECORDS</a></li>
+				<li><a class="navbar-brand" id="VIEWRECORDS" href="OneRead.jsp">VIEWRECORDS</a></li>
+					<li><a class="navbar-brand" id="home" href="Home.jsp">LOGOUT</a></li>
+
+
+				</ul>
+			</div>
+
+		</div>
+		<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+	</div>
+	
+	
 </body>
 </html>
