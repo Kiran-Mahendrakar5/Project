@@ -54,6 +54,7 @@
     /* Add any other styling you need for the button */
 }
 
+
     </style>
  <script type="text/javascript">
 
@@ -644,6 +645,8 @@ document.getElementById("post").addEventListener("change", function() {
       <th scope="col">Aadhar Number</th>
       <th scope="col">Serve Number</th>
       <th scope="col">Year</th>
+      <th scope="col">EDIT</th>
+      <th scope="col">DELETE</th>
       
     </tr></thead>
   

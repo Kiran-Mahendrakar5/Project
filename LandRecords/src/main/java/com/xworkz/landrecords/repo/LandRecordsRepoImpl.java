@@ -97,11 +97,12 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 	}
 
 	@Override
-	public boolean deleteByserveNumber(String serveNumber) {
+	public boolean deleteByserveNumber(String hissaNumber,String serveNumber,int status){
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Query query = em.createNamedQuery("Deleteserve");
-		query.setParameter("dt", serveNumber);
+		query.setParameter("hn", hissaNumber);
+		query.setParameter("sn", serveNumber);
 		query.executeUpdate();
 		try {
 			em.getTransaction().commit();
@@ -117,31 +118,55 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 	}
 
 	@Override
-	public List<LandRecordsDtoOne> findByvillage(String village) throws NoResultException, NonUniqueResultException{
+	public List<LandRecordsDtoOne> findByvillage(String village) throws NoResultException, NonUniqueResultException {
 		EntityManager em = emf.createEntityManager();
-		
+
 		TypedQuery<LandRecordsDtoOne> query = em.createNamedQuery("findByvillage", LandRecordsDtoOne.class);
 		query.setParameter("vi", village);
 		List<LandRecordsDtoOne> dto = query.getResultList();
 		return dto;
 	}
 
+	
 	@Override
-	public boolean updateByHissaNumberAndSurveyNumber(String ownerName, String mobileNumber, String aadharNumber,
-			String year, String hissaNumber, String serveNumber) {
+	public boolean updateDetailsByHissaAndSurveyNumber(String ownerName, String mobileNumber, 
+			String aadharNumber, String year,String hissaNumber, String serveNumber , int status){
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Query query = em.createNamedQuery("updateByHissaNAndSurveyN");
-		query.setParameter("onum", ownerName);
-		query.setParameter("mnum", mobileNumber);
-		query.setParameter("aanum", aadharNumber);
-		query.setParameter("ye", year);
-		query.setParameter("hnum", hissaNumber);
-		query.setParameter("sernum", serveNumber);
+		query.setParameter("on", ownerName);
+		query.setParameter("mn", mobileNumber);
+		query.setParameter("an", aadharNumber);
+		query.setParameter("yr" ,year);
+		query.setParameter("hn" ,hissaNumber);
+		query.setParameter("sn" ,serveNumber);
+		query.setParameter("st", status);
 		query.executeUpdate();
-		em.getTransaction().commit();
-		return true;
+		try {
+			em.getTransaction().commit();
+			System.out.println("successfully updated");
+			return true;
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			System.out.println("closing");
+			em.close();
+		}
 
+	}
+
+	@Override
+	public LandRecordsDtoOne ifExist(String hissaNumber , String serveNumber , int status) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<LandRecordsDtoOne> query = em.createNamedQuery("ifExist", LandRecordsDtoOne.class);
+		query.setParameter("hn", hissaNumber);
+		query.setParameter("sn", serveNumber);
+		query.setParameter("st", status);
+		LandRecordsDtoOne dtos = query.getSingleResult();
+		return dtos;
 	}
 
 }

@@ -224,7 +224,7 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 		String senderPassword = "Kiran@28";
 		String recipientEmail = Email;
 		String subject = "Your OTP Code";
-		String messageText = "Your OTP code is: " + otp + "vaild for only 10 mits ";
+		String messageText = "Dear User,Your OTP For Registration Is:" + otp + " Use This Passward To Validate Your Login ";
 		System.out.println(otp);
 
 		// Set up JavaMail properties
@@ -263,13 +263,16 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 
 	}
 
+	
 	@Override
-	public boolean deleteByserveNumber(String serveNumber) {
-		if (serveNumber != null && !serveNumber.isEmpty()) {
-			return repo.deleteByserveNumber(serveNumber);
-
+	public boolean deleteByserveNumber(String hissaNumber,String serveNumber){
+		if (hissaNumber != null && !hissaNumber.isEmpty()) {
+			if (serveNumber != null && !serveNumber.isEmpty()) {
+				return repo.deleteByserveNumber(hissaNumber, serveNumber,1);
+				
+			}
+			return false;
 		}
-		System.out.println("from service impl false");
 		return false;
 	}
 
@@ -277,7 +280,7 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 	public List<LandRecordsDtoOne> findByvillage(String village) {
 		if (village != null && !village.isEmpty()) {
 			try {
-				List<LandRecordsDtoOne>	  dtos=repo.findByvillage(village);
+				List<LandRecordsDtoOne> dtos = repo.findByvillage(village);
 				System.out.println(dtos);
 				return dtos;
 			} catch (Exception e) {
@@ -289,40 +292,53 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 		return null;
 	}
 
+	
 	@Override
-	public boolean updateByHissaNumberAndSurveyNumber(String ownerName, String mobileNumber, String aadharNumber,
-			String year, String hissaNumber, String serveNumber) {
-		if (ownerName != null || !ownerName.isEmpty()) {
-			if (mobileNumber != null || !mobileNumber.isEmpty()) {
-				if (aadharNumber != null || !aadharNumber.isEmpty()) {
-					if (year != null || !year.isEmpty()) {
-						if (hissaNumber != null || !hissaNumber.isEmpty()) {
-							if (serveNumber != null || !serveNumber.isEmpty()) {
-								System.out.println("successfully updated");
-								return repo.updateByHissaNumberAndSurveyNumber(ownerName, mobileNumber, aadharNumber,
-										year, hissaNumber, serveNumber);
-
+	public boolean updateDetailsByHissaAndSurveyNumber(LandRecordsDtoOne dto,Model model){
+		if (dto.getOwnerName() != null && !dto.getOwnerName().isEmpty()) {
+			if (dto.getMobileNumber() != null && !dto.getMobileNumber().isEmpty()) {
+				if (dto.getAadharNumber() != null && !dto.getAadharNumber().isEmpty()) {
+					if (dto.getYear() != null && !dto.getYear().isEmpty()) {
+						if (dto.getHissaNumber() != null && !dto.getHissaNumber().isEmpty()) {
+							if (dto.getServeNumber() != null && !dto.getServeNumber().isEmpty()) {
+								System.out.println("validated for update");
+								return repo.updateDetailsByHissaAndSurveyNumber(dto.getOwnerName(), dto.getMobileNumber(),dto.getAadharNumber(),dto.getYear(),dto.getHissaNumber(),dto.getServeNumber(),0);
+								
 							}
-							System.out.println("serveNumber false");
+							System.out.println("invalid surve number");
 							return false;
-
 						}
-						System.out.println("hissaNumber false");
+						System.out.println("invalid hissa number");
 						return false;
-
 					}
-					System.out.println("year false");
+					System.out.println("invalid year number");
 					return false;
+					
 				}
-				System.out.println("aadharNumber false");
+				System.out.println("invalid aadhar number");
 				return false;
 			}
-			System.out.println("mobileNumber false");
+			System.out.println("invalid mobile number");
 			return false;
-
 		}
-		System.out.println("ownerName false");
+		System.out.println("invalid owner number");
 		return false;
 	}
 
+	@Override
+	public LandRecordsDtoOne ifExist(String hissaNumber , String serveNumber , int status,Model model) {
+		if (hissaNumber != null && !hissaNumber.isEmpty()) {
+			if (serveNumber != null && !serveNumber.isEmpty()) {
+				return repo.ifExist(hissaNumber, serveNumber, 0);
+			}
+			return null;
+		}
+		return null;
+	}
+	
 }
+	
+		
+
+
+

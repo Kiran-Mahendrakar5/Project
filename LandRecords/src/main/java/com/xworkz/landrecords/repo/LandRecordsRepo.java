@@ -21,11 +21,17 @@ public interface LandRecordsRepo {
 	
 	public List<LandRecordsDtoOne> readAll();
 	
-	public boolean deleteByserveNumber(String serveNumber);
+	public boolean deleteByserveNumber(String hissaNumber,String serveNumber,int status);
 	
 	public List<LandRecordsDtoOne> findByvillage(String village);
 	
-	public boolean updateByHissaNumberAndSurveyNumber(String ownerName,String mobileNumber,String aadharNumber,
-			String year,String hissaNumber,String serveNumber);
+	public	boolean updateDetailsByHissaAndSurveyNumber(String ownerName, String mobileNumber, String aadharNumber, String year,
+			String hissaNumber, String serveNumber, int status);
+	
+	public LandRecordsDtoOne ifExist(String hissaNumber , String serveNumber , int status);
+
+
+
+	
 
 }

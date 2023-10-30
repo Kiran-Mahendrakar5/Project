@@ -31,14 +31,18 @@ public interface LandRecordsService {
 	
 	public List<LandRecordsDtoOne> readAll();
 	
-	public boolean deleteByserveNumber(String serveNumber);
+	public boolean deleteByserveNumber(String hissaNumber,String serveNumber);
 	
 	public List<LandRecordsDtoOne> findByvillage(String village);
 	
-	public boolean updateByHissaNumberAndSurveyNumber(String ownerName,String mobileNumber,String aadharNumber,
-			String year,String hissaNumber,String serveNumber);
+	public boolean updateDetailsByHissaAndSurveyNumber(LandRecordsDtoOne dto,Model model);
+	
+	public LandRecordsDtoOne ifExist(String hissaNumber , String surveyNumber , int status , Model model);
+
+		
 	
 
+	
 	
 
 }

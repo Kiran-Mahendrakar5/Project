@@ -18,6 +18,7 @@ a:link, a:visited {
 a:hover, a:active {
 	background-color: orange;
 }
+
 body {
 	background-image: radial-gradient(circle at 30% 86%, rgba(255, 255, 255, 0.03)
 		0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
@@ -102,6 +103,25 @@ ul li a {
 ul li a:hover {
 	color: #ff7200;
 }
+
+.content {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	color: white; /* Set the text color */
+	font-size: 42px; /* Increase the font size as needed */
+    font-weight: bold; /* Make the text bold */
+    margin: 0; /* Remove default margin for h1 */
+	
+}
+
+.content h1 {
+	font-size: 32px; /* Adjust the font size as needed */
+	margin: 0; /* Remove default margin for h1 */
+}
 </style>
 </head>
 
@@ -115,7 +135,8 @@ ul li a:hover {
 
 
 					<li><a class="navbar-brand" id="ADDRECORDS" href="Add.jsp">ADDRECORDS</a></li>
-				<li><a class="navbar-brand" id="VIEWRECORDS" href="OneRead.jsp">VIEWRECORDS</a></li>
+					<li><a class="navbar-brand" id="VIEWRECORDS"
+						href="OneRead.jsp">VIEWRECORDS</a></li>
 					<li><a class="navbar-brand" id="home" href="Home.jsp">LOGOUT</a></li>
 
 
@@ -123,9 +144,15 @@ ul li a:hover {
 			</div>
 
 		</div>
+
+		<div class="content">
+			<!-- <h2>WELCOME ${adminName}</h2> -->
+		<span style="position: relative; top: -80px;">WELCOME To Karnataka Bhoomi Land Records RTC</span>
+			
+		</div>
 		<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 	</div>
-	
-	
+
+
 </body>
 </html>

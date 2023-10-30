@@ -19,12 +19,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "LandRecordsDtoOne_table")
 @NamedQuery(name = "readAll", query = "select dto from LandRecordsDtoOne dto")
-@NamedQuery(name = "Deleteserve", query = "delete from LandRecordsDtoOne dto where dto.serveNumber=:dt")
+@NamedQuery(name = "Deleteserve", query = "update LandRecordsDtoOne dto set dto.status=1 where dto.hissaNumber=:hn and dto.serveNumber=:sn")
 @NamedQuery(name = "findByvillage", query = "select dto from LandRecordsDtoOne dto where dto.village=:vi")
-//@NamedQuery(name = "updateByHissaNAndSurveyN", query = "update LandRecordsDtoOne dto set dto.hissaNumber=:hnum where dto.serveNumber=:sernum dto.year=:ye dto.aadharNumber=:aanum dto.mobileNumber=:mnum dto.ownerName=:onum")
-@NamedQuery(name = "updateByHissaNAndSurveyN", query = "update LandRecordsDtoOne dto set dto.hissaNumber=:hnum where dto.serveNumber=:sernum and dto.year=:ye and dto.aadharNumber=:aanum and dto.mobileNumber=:mnum and dto.ownerName=:onum")
-@NamedQuery(name = "updateByAadharMobileOwnerYear", query = "UPDATE LandRecordsDtoOne dto SET dto.hissaNumber = :hnum, dto.serveNumber = :sernum WHERE dto.aadharNumber = :aanum AND dto.mobileNumber = :mnum AND dto.ownerName = :onum AND dto.year = :ye")
-
+@NamedQuery(name = "updateByHissaNAndSurveyN", query = "update LandRecordsDtoOne dto set dto.ownerName=:on, dto.mobileNumber=:mn, dto.aadharNumber=:an, dto.year=:yr where dto.hissaNumber=:hn and serveNumber=:sn and dto.status=:st")
+@NamedQuery(name = "ifExist", query = "Select dto from LandRecordsDtoOne dto where dto.hissaNumber=:hn and dto.serveNumber=:sn and dto.status=:st")
 
 public class LandRecordsDtoOne implements Serializable{
 	@Id
@@ -41,14 +39,14 @@ public class LandRecordsDtoOne implements Serializable{
 	private String hissaNumber;
 	private String serveNumber;
 	private String year;
-	
+	private int status = 0;
 	public LandRecordsDtoOne() {
 		super();
-}
-
+		// TODO Auto-generated constructor stub
+	}
 	public LandRecordsDtoOne(int id, String state, String district, String taluk, String post, String village,
 			String ownerName, String mobileNumber, String aadharNumber, String hissaNumber, String serveNumber,
-			String year) {
+			String year, int status) {
 		super();
 		this.id = id;
 		this.state = state;
@@ -62,111 +60,94 @@ public class LandRecordsDtoOne implements Serializable{
 		this.hissaNumber = hissaNumber;
 		this.serveNumber = serveNumber;
 		this.year = year;
+		this.status = status;
 	}
-
 	@Override
 	public String toString() {
 		return "LandRecordsDtoOne [id=" + id + ", state=" + state + ", district=" + district + ", taluk=" + taluk
 				+ ", post=" + post + ", village=" + village + ", ownerName=" + ownerName + ", mobileNumber="
 				+ mobileNumber + ", aadharNumber=" + aadharNumber + ", hissaNumber=" + hissaNumber + ", serveNumber="
-				+ serveNumber + ", year=" + year + "]";
+				+ serveNumber + ", year=" + year + ", status=" + status + "]";
 	}
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getState() {
 		return state;
 	}
-
 	public void setState(String state) {
 		this.state = state;
 	}
-
 	public String getDistrict() {
 		return district;
 	}
-
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-
 	public String getTaluk() {
 		return taluk;
 	}
-
 	public void setTaluk(String taluk) {
 		this.taluk = taluk;
 	}
-
 	public String getPost() {
 		return post;
 	}
-
 	public void setPost(String post) {
 		this.post = post;
 	}
-
 	public String getVillage() {
 		return village;
 	}
-
 	public void setVillage(String village) {
 		this.village = village;
 	}
-
 	public String getOwnerName() {
 		return ownerName;
 	}
-
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
 	}
-
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
-
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
-
 	public String getAadharNumber() {
 		return aadharNumber;
 	}
-
 	public void setAadharNumber(String aadharNumber) {
 		this.aadharNumber = aadharNumber;
 	}
-
 	public String getHissaNumber() {
 		return hissaNumber;
 	}
-
 	public void setHissaNumber(String hissaNumber) {
 		this.hissaNumber = hissaNumber;
 	}
-
 	public String getServeNumber() {
 		return serveNumber;
 	}
-
 	public void setServeNumber(String serveNumber) {
 		this.serveNumber = serveNumber;
 	}
-
 	public String getYear() {
 		return year;
 	}
-
 	public void setYear(String year) {
 		this.year = year;
 	}
-
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+	
 	
 }
