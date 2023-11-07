@@ -97,7 +97,7 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 	}
 
 	@Override
-	public boolean deleteByserveNumber(String hissaNumber,String serveNumber,int status){
+	public boolean deleteByserveNumber(String hissaNumber, String serveNumber, int status) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Query query = em.createNamedQuery("Deleteserve");
@@ -127,19 +127,18 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 		return dto;
 	}
 
-	
 	@Override
-	public boolean updateDetailsByHissaAndSurveyNumber(String ownerName, String mobileNumber, 
-			String aadharNumber, String year,String hissaNumber, String serveNumber , int status){
+	public boolean updateDetailsByHissaAndSurveyNumber(String ownerName, String mobileNumber, String aadharNumber,
+			String year, String hissaNumber, String serveNumber, int status) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Query query = em.createNamedQuery("updateByHissaNAndSurveyN");
 		query.setParameter("on", ownerName);
 		query.setParameter("mn", mobileNumber);
 		query.setParameter("an", aadharNumber);
-		query.setParameter("yr" ,year);
-		query.setParameter("hn" ,hissaNumber);
-		query.setParameter("sn" ,serveNumber);
+		query.setParameter("yr", year);
+		query.setParameter("hn", hissaNumber);
+		query.setParameter("sn", serveNumber);
 		query.setParameter("st", status);
 		query.executeUpdate();
 		try {
@@ -150,8 +149,7 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 			em.getTransaction().rollback();
 			e.printStackTrace();
 			return false;
-		}
-		finally {
+		} finally {
 			System.out.println("closing");
 			em.close();
 		}
@@ -159,7 +157,7 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 	}
 
 	@Override
-	public LandRecordsDtoOne ifExist(String hissaNumber , String serveNumber , int status) {
+	public LandRecordsDtoOne ifExist(String hissaNumber, String serveNumber, int status) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<LandRecordsDtoOne> query = em.createNamedQuery("ifExist", LandRecordsDtoOne.class);
 		query.setParameter("hn", hissaNumber);
@@ -168,5 +166,19 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 		LandRecordsDtoOne dtos = query.getSingleResult();
 		return dtos;
 	}
+
+	@Override
+	public boolean updateStatus(String hissaNumber, String serveNumber) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Query query = em.createNamedQuery("updateStatus");
+		query.setParameter("hissa", hissaNumber);
+		query.setParameter("surve", serveNumber);
+		query.executeUpdate();
+		em.getTransaction().commit();
+		return true;
+	}
+
+	
 
 }

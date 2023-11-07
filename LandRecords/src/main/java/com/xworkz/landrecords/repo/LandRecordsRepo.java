@@ -29,6 +29,10 @@ public interface LandRecordsRepo {
 			String hissaNumber, String serveNumber, int status);
 	
 	public LandRecordsDtoOne ifExist(String hissaNumber , String serveNumber , int status);
+	
+	public boolean updateStatus(String hissaNumber, String serveNumber);
+	
+	
 
 
 

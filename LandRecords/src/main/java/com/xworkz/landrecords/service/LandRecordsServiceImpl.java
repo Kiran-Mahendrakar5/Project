@@ -224,7 +224,8 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 		String senderPassword = "Kiran@28";
 		String recipientEmail = Email;
 		String subject = "Your OTP Code";
-		String messageText = "Dear User,Your OTP For Registration Is:" + otp + " Use This Passward To Validate Your Login ";
+		String messageText = "Dear User,Your OTP For Registration Is:" + otp
+				+ " Use This Passward To Validate Your Login ";
 		System.out.println(otp);
 
 		// Set up JavaMail properties
@@ -263,13 +264,12 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 
 	}
 
-	
 	@Override
-	public boolean deleteByserveNumber(String hissaNumber,String serveNumber){
+	public boolean deleteByserveNumber(String hissaNumber, String serveNumber) {
 		if (hissaNumber != null && !hissaNumber.isEmpty()) {
 			if (serveNumber != null && !serveNumber.isEmpty()) {
-				return repo.deleteByserveNumber(hissaNumber, serveNumber,1);
-				
+				return repo.deleteByserveNumber(hissaNumber, serveNumber, 1);
+
 			}
 			return false;
 		}
@@ -292,9 +292,8 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 		return null;
 	}
 
-	
 	@Override
-	public boolean updateDetailsByHissaAndSurveyNumber(LandRecordsDtoOne dto,Model model){
+	public boolean updateDetailsByHissaAndSurveyNumber(LandRecordsDtoOne dto, Model model) {
 		if (dto.getOwnerName() != null && !dto.getOwnerName().isEmpty()) {
 			if (dto.getMobileNumber() != null && !dto.getMobileNumber().isEmpty()) {
 				if (dto.getAadharNumber() != null && !dto.getAadharNumber().isEmpty()) {
@@ -302,8 +301,10 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 						if (dto.getHissaNumber() != null && !dto.getHissaNumber().isEmpty()) {
 							if (dto.getServeNumber() != null && !dto.getServeNumber().isEmpty()) {
 								System.out.println("validated for update");
-								return repo.updateDetailsByHissaAndSurveyNumber(dto.getOwnerName(), dto.getMobileNumber(),dto.getAadharNumber(),dto.getYear(),dto.getHissaNumber(),dto.getServeNumber(),0);
-								
+								return repo.updateDetailsByHissaAndSurveyNumber(dto.getOwnerName(),
+										dto.getMobileNumber(), dto.getAadharNumber(), dto.getYear(),
+										dto.getHissaNumber(), dto.getServeNumber(), 0);
+
 							}
 							System.out.println("invalid surve number");
 							return false;
@@ -313,7 +314,7 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 					}
 					System.out.println("invalid year number");
 					return false;
-					
+
 				}
 				System.out.println("invalid aadhar number");
 				return false;
@@ -326,7 +327,7 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 	}
 
 	@Override
-	public LandRecordsDtoOne ifExist(String hissaNumber , String serveNumber , int status,Model model) {
+	public LandRecordsDtoOne ifExist(String hissaNumber, String serveNumber, int status, Model model) {
 		if (hissaNumber != null && !hissaNumber.isEmpty()) {
 			if (serveNumber != null && !serveNumber.isEmpty()) {
 				return repo.ifExist(hissaNumber, serveNumber, 0);
@@ -335,10 +336,21 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 		}
 		return null;
 	}
+
+	@Override
+	public boolean updateStatus(String hissaNumber, String serveNumber) {
+		if (hissaNumber != null && !hissaNumber.isEmpty()) {
+			if (serveNumber != null && !serveNumber.isEmpty()) {
+				repo.updateStatus(hissaNumber, serveNumber);
+				return true;
+
+			}
+			System.out.println("servenumber invalid");
+			return false;
+		}
+		System.out.println("hissanumber invalid");
+		return false;
+	}
+
 	
 }
-	
-		
-
-
-

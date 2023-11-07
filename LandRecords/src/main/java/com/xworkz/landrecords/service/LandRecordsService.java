@@ -37,9 +37,13 @@ public interface LandRecordsService {
 	
 	public boolean updateDetailsByHissaAndSurveyNumber(LandRecordsDtoOne dto,Model model);
 	
-	public LandRecordsDtoOne ifExist(String hissaNumber , String surveyNumber , int status , Model model);
+	public LandRecordsDtoOne ifExist(String hissaNumber , String surveyNumber, int status , Model model);
 
-		
+	public boolean updateStatus(String hissaNumber, String serveNumber);
+
+	
+
+
 	
 
 	

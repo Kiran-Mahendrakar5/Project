@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xworkz.landrecords.dto.LandRecordsDto;
 import com.xworkz.landrecords.dto.LandRecordsDtoOne;
+import com.xworkz.landrecords.dto.UserDto;
 import com.xworkz.landrecords.service.LandRecordsService;
+import com.xworkz.landrecords.service.UserService;
 
 @Controller
 public class LandRecordsController {
 
 	@Autowired
 	private LandRecordsService service;
+
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "/send", method = RequestMethod.POST)
 	public String getMyMethod(LandRecordsDto dto, Model model) {
@@ -56,6 +61,7 @@ public class LandRecordsController {
 		System.out.println(dto);
 		if (dto != null) {
 			System.out.println("Otp is verified");
+			 model.addAttribute("userName", dto.getAdminName());
 			model.addAttribute("otp", otp);
 
 			return "AddResolver";
@@ -90,7 +96,7 @@ public class LandRecordsController {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String Deleteserve(@RequestParam String hissaNumber,@RequestParam String serveNumber, Model model) {
+	public String Deleteserve(@RequestParam String hissaNumber, @RequestParam String serveNumber, Model model) {
 		boolean delete = service.deleteByserveNumber(hissaNumber, serveNumber);
 		System.out.println(delete);
 		if (delete) {
@@ -117,7 +123,7 @@ public class LandRecordsController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String update(LandRecordsDtoOne dto,Model model) {
+	public String update(LandRecordsDtoOne dto, Model model) {
 		boolean update = service.updateDetailsByHissaAndSurveyNumber(dto, model);
 		if (update) {
 			model.addAttribute("upd", "Update Succefully");
@@ -132,8 +138,7 @@ public class LandRecordsController {
 	}
 
 	@GetMapping(value = "/getNumber")
-	public String autoReadNumber(@RequestParam String hissaNumber, @RequestParam String serveNumber,
-			Model model) {
+	public String autoReadNumber(@RequestParam String hissaNumber, @RequestParam String serveNumber, Model model) {
 		LandRecordsDtoOne exit = service.ifExist(hissaNumber, serveNumber, 0, model);
 		if (exit != null) {
 			return "OneRead";
@@ -142,6 +147,94 @@ public class LandRecordsController {
 			return "OneRead";
 		}
 
+	}
+
+	@RequestMapping(value = "/UserRecords", method = RequestMethod.POST)
+	public String registration(UserDto dto, Model model) {
+		boolean saved = userService.saveUserDetails(dto, model);
+		System.out.println(saved);
+
+		if (saved) {
+			model.addAttribute("Registration", "Registered Successfully");
+			return "UserSignup";
+		} else {
+			model.addAttribute("NotRegistration", "Not Registered, Please give proper details");
+			return "UserSignup";
+		}
+
+	}
+
+	@RequestMapping(value = "/uLogin", method = RequestMethod.POST)
+	public String uLogin(@RequestParam String email, @RequestParam String password, Model model) {
+		UserDto logIn = userService.ifExistss(email, password, model);
+		System.out.println(logIn);
+		if (logIn != null) {
+			model.addAttribute("Login", "Login Successful");
+			return "ViewUser";
+		}
+		return "UserSignIn";
+	}
+
+	@RequestMapping(value = "/ForgetPassward", method = RequestMethod.POST)
+	public String verify(@RequestParam String email, Model model) {
+
+		boolean sign = userService.checkotp(email, model);
+		if (sign) {
+			model.addAttribute("Checking", "Check the Email");
+			return "ForgetPassward";
+		}
+		System.out.println("forgetpassward1");
+		return "ForgetPassward";
+		
+	}
+
+	@RequestMapping(value = "/checksotp", method = RequestMethod.POST)
+	public String verifytp(@RequestParam String otp, Model model) {
+
+		UserDto rightOtp = userService.findByOtp(otp, model);
+		if (rightOtp != null) {
+			model.addAttribute("check", rightOtp);
+			return "UpdatePassward";
+		}
+		System.out.println("forgetpassward2");
+		return "ForgetPassward";
+	}
+
+	@RequestMapping(value = "/updatePasswords", method = RequestMethod.POST)
+	public String updatePassword(@RequestParam String email, @RequestParam String password,
+			@RequestParam String confirmPassword, Model model) {
+		boolean update = userService.updatePasswords(password, confirmPassword, email, model);
+		if (update) {
+			model.addAttribute("update", "Password Updated Successfully");
+			return "ViewUser";
+		}
+		return "UpdatePassward";
+	}
+
+	@RequestMapping(value = "/viewUser", method = RequestMethod.POST)
+	public String viewUser(@RequestParam String village, Model model) {
+		List<LandRecordsDtoOne> viewData = service.findByvillage(village);
+		System.out.println(viewData);
+
+		if (viewData != null) {
+			model.addAttribute("view", viewData);
+			System.out.println("Data is Present");
+			return "ViewUser";
+		}
+		model.addAttribute("Read", "Records not found");
+		return "ViewUser";
+	}
+
+	@RequestMapping(value = "/Card", method = RequestMethod.POST)
+	public String userView(@RequestParam String  hissaNumber, @RequestParam String surveNumber,@RequestParam int status, Model model) {
+		LandRecordsDtoOne data =service.ifExist(hissaNumber, surveNumber, status, model);
+		if (data != null) {
+			model.addAttribute("forloop", data);
+			System.out.println("Data is Present");
+			return "ViewUser";
+		}
+		model.addAttribute("Reading", "No Records found");
+		return "ViewUser";
 	}
 
 }

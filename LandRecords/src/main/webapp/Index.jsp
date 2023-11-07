@@ -325,6 +325,24 @@ a:link, a:visited {
 a:hover, a:active {
   background-color: orange;
 }
+
+.fade-in-image {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+  max-width: 390px;
+  animation: fade-in 6s; /* Adjust the animation duration as needed */
+  opacity: 10;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 </style>
 </head>
 <body>
@@ -338,7 +356,7 @@ a:hover, a:active {
 				<ul>
 				
 					<li><a href="Home.jsp" id="Admin">ADMIN</a></li>
-					<li><a href="#" id="User">USER</a></li>
+					<li><a href="User.jsp" id="User">USER</a></li>
 					
 					
 				</ul>
@@ -357,6 +375,9 @@ a:hover, a:active {
 			</p>
 
 		</div>
+		<!-- <img class="fade-in-image" src="https://w0.peakpx.com/wallpaper/502/348/HD-wallpaper-indonesia-village-agriculture-cropland-top-view-rural-landscape-thumbnail.jpg" alt="Karnataka Seal" style="position: absolute; top: 50%; right: 50px; transform: translateY(-50%); max-width: 390px;">-->
+		<img class="fade-in-image" src="https://c0.wallpaperflare.com/preview/828/84/890/aerial-aerial-shot-beautiful-bird-s-eye-view.jpg" alt="Karnataka Seal" style="position: absolute; top: 50%; right: 30px; transform: translateY(-50%); max-width: 390px;">
+		
 	</div>
 	</div>
 	</div>

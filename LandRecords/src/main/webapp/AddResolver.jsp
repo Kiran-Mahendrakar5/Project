@@ -146,10 +146,9 @@ ul li a:hover {
 		</div>
 
 		<div class="content">
-			<!-- <h2>WELCOME ${adminName}</h2> -->
-		<span style="position: relative; top: -80px;">WELCOME To Karnataka Bhoomi Land Records RTC</span>
-			
-		</div>
+    <span style="position: relative; top: -80px;">WELCOME ${userName} To Karnataka Bhoomi Land Records RTC</span>
+</div>
+
 		<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 	</div>
 

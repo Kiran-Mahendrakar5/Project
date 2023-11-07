@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 @NamedQuery(name = "findByvillage", query = "select dto from LandRecordsDtoOne dto where dto.village=:vi")
 @NamedQuery(name = "updateByHissaNAndSurveyN", query = "update LandRecordsDtoOne dto set dto.ownerName=:on, dto.mobileNumber=:mn, dto.aadharNumber=:an, dto.year=:yr where dto.hissaNumber=:hn and serveNumber=:sn and dto.status=:st")
 @NamedQuery(name = "ifExist", query = "Select dto from LandRecordsDtoOne dto where dto.hissaNumber=:hn and dto.serveNumber=:sn and dto.status=:st")
+@NamedQuery(name = "updateStatus", query = "update LandRecordsDtoOne dto set dto.status=1 where hissaNumber =:hissa and serveNumber =:surve")
 
 public class LandRecordsDtoOne implements Serializable{
 	@Id
