@@ -121,13 +121,14 @@
     <div class="form">
       <h2>SEND OTP</h2>
      <form action="ForgetPassward" method="post">
-        <input type="email" name="email" placeholder="Enter your Email">
+        <input type="email" name="email" value="${Emails}" placeholder="Enter your Email">
          <h5 style="color: red;">${Email}</h5>
         <p><a href="ForgetPassward.jsp">Resend OTP</a></p>
         <button type="submit">Send OTP</button>
         </form>
         <form action="checksotp" method="post">
         <input type="number" name="otp" value="${checkotp}" placeholder="Enter OTP">
+        <h5>${otpsent}</h5>
         <button type="submit">Submit</button>
       </form>
     </div>

@@ -139,7 +139,7 @@ public class LandRecordsController {
 
 	@GetMapping(value = "/getNumber")
 	public String autoReadNumber(@RequestParam String hissaNumber, @RequestParam String serveNumber, Model model) {
-		LandRecordsDtoOne exit = service.ifExist(hissaNumber, serveNumber, 0, model);
+		LandRecordsDtoOne exit = service.ifExist(hissaNumber, serveNumber, model);
 		if (exit != null) {
 			return "OneRead";
 		} else {
@@ -156,7 +156,7 @@ public class LandRecordsController {
 
 		if (saved) {
 			model.addAttribute("Registration", "Registered Successfully");
-			return "UserSignup";
+			return "UserSignIn";
 		} else {
 			model.addAttribute("NotRegistration", "Not Registered, Please give proper details");
 			return "UserSignup";
@@ -181,6 +181,7 @@ public class LandRecordsController {
 		boolean sign = userService.checkotp(email, model);
 		if (sign) {
 			model.addAttribute("Checking", "Check the Email");
+			model.addAttribute("Emails", email);
 			return "ForgetPassward";
 		}
 		System.out.println("forgetpassward1");
@@ -189,7 +190,7 @@ public class LandRecordsController {
 	}
 
 	@RequestMapping(value = "/checksotp", method = RequestMethod.POST)
-	public String verifytp(@RequestParam String otp, Model model) {
+	public String verifyy(@RequestParam String otp, Model model) {
 
 		UserDto rightOtp = userService.findByOtp(otp, model);
 		if (rightOtp != null) {
@@ -199,6 +200,7 @@ public class LandRecordsController {
 		System.out.println("forgetpassward2");
 		return "ForgetPassward";
 	}
+
 
 	@RequestMapping(value = "/updatePasswords", method = RequestMethod.POST)
 	public String updatePassword(@RequestParam String email, @RequestParam String password,
@@ -225,9 +227,9 @@ public class LandRecordsController {
 		return "ViewUser";
 	}
 
-	@RequestMapping(value = "/Card", method = RequestMethod.POST)
-	public String userView(@RequestParam String  hissaNumber, @RequestParam String surveNumber,@RequestParam int status, Model model) {
-		LandRecordsDtoOne data =service.ifExist(hissaNumber, surveNumber, status, model);
+	@RequestMapping(value = "/shdefault", method = RequestMethod.POST)
+	public String userView(@RequestParam String  hissaNumber, @RequestParam String serveNumber, Model model) {
+		LandRecordsDtoOne data =service.ifExist(hissaNumber, serveNumber, model);
 		if (data != null) {
 			model.addAttribute("forloop", data);
 			System.out.println("Data is Present");

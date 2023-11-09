@@ -23,5 +23,7 @@ public interface UserService {
 	public boolean senderOtp(String otp, String email);
 	
 	public boolean updatePasswords(String password, String Passwords, String email, Model model);
+	
+	public boolean updateOtpByEmail(String otp, String email);
 
 }

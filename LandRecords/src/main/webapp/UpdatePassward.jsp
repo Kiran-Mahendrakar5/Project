@@ -70,7 +70,9 @@ body {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	padding: 25px;
+	padding: 20px;
+	margin: 10px;
+	
 }
 
 .centered-row input[type="email"], .centered-row input[type="password"]
@@ -79,21 +81,23 @@ body {
 	margin: 10px;
 	padding: 10px;
 	border: 1px solid #007bff;
-	border-radius: 15px;
-	width: 120%; /* Adjust the width of the input elements */
+	border-radius: 25px;
+	width: 140%; /* Adjust the width of the input elements */
 }
 
 .centered-row button {
 	display: block;
-	margin: 10px;
-	padding: 10px 20px;
+	margin: 40px;
+	padding: 10px 10px; /* Reduced padding for a smaller button */
 	background: #007bff;
-	color: black;
+	color: white;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
-	width: 90%; /* Adjust the width of the input elements */
+	font-size: 14px; /* Reduced font size */
+	  width: 50%;
 }
+
 </style>
 </head>
 <body>
@@ -117,7 +121,7 @@ body {
 			<input type="password" name="password" placeholder="New Password">
 			<input type="password" name="confirmPassword"
 				placeholder="Confirm Password">
-			<button type="submit">UPDATE PASSWORD</button>
+			<button type="submit">UPDATE</button>
 		</form>
 	</div>
 

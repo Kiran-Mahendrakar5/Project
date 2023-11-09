@@ -157,12 +157,12 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 	}
 
 	@Override
-	public LandRecordsDtoOne ifExist(String hissaNumber, String serveNumber, int status) {
+	public LandRecordsDtoOne ifExist(String hissaNumber, String serveNumber) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<LandRecordsDtoOne> query = em.createNamedQuery("ifExist", LandRecordsDtoOne.class);
 		query.setParameter("hn", hissaNumber);
 		query.setParameter("sn", serveNumber);
-		query.setParameter("st", status);
+//		query.setParameter("st", status);
 		LandRecordsDtoOne dtos = query.getSingleResult();
 		return dtos;
 	}

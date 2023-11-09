@@ -19,4 +19,8 @@ public interface UserRepository {
 	public UserDto passwordExists(String password);
 	
 	public boolean updatePasswords(String password, String Passwords, String email, Model model);
+	
+	
+	
+	
 }

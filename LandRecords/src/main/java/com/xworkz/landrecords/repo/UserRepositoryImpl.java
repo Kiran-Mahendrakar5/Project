@@ -2,6 +2,7 @@ package com.xworkz.landrecords.repo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,44 @@ public class UserRepositoryImpl implements UserRepository {
 
 	}
 
+//	@Override
+//	public UserDto ifExistss(String email, String password, Model model) {
+//		EntityManager em = emf.createEntityManager();
+//		Query query = em.createNamedQuery("IfExist");
+//		query.setParameter("email", email);
+//		query.setParameter("password", password);
+//		UserDto dto =  (UserDto) query.getSingleResult();
+//		return dto;
+//	}
+	
 	@Override
 	public UserDto ifExistss(String email, String password, Model model) {
-		EntityManager em = emf.createEntityManager();
-		Query query = em.createNamedQuery("IfExist");
-		query.setParameter("email", email);
-		query.setParameter("password", password);
-		UserDto dto =  (UserDto) query.getSingleResult();
-		return dto;
+	    EntityManager em = emf.createEntityManager();
+	    try {
+	        Query query = em.createNamedQuery("IfExist");
+	        query.setParameter("email", email);
+	        query.setParameter("password", password);
+
+	        UserDto dto = (UserDto) query.getSingleResult();
+
+	        // Check if the result is not null (user exists)
+	        if (dto != null) {
+	            return dto;
+	        } else {
+	            // User not found, handle the case (e.g., throw an exception or return null)
+	            // For simplicity, let's return null in this example
+	            return null;
+	        }
+	    } catch (NoResultException e) {
+	        // Handle the case where no user is found
+	        // For simplicity, let's return null in this example
+	    	model.addAttribute("entre", "No Data Found......!");
+	        return null;
+	    } finally {
+	        em.close(); // Close the EntityManager in the finally block
+	    }
 	}
+
 
 	@Override
 	public UserDto emailExists(String email) {
@@ -57,10 +87,12 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public boolean updateOtpByEmail(String otp, String email) {
 		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
+		em.getTransaction().begin();	
 		Query query = em.createNamedQuery("updateOtpByEmail");
 		query.setParameter("otps", otp);
+		System.out.println(otp);
 		query.setParameter("emil", email);
+		System.out.println(email);
 		query.executeUpdate();
 		em.getTransaction().commit();
 		return true;
@@ -71,7 +103,7 @@ public class UserRepositoryImpl implements UserRepository {
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createNamedQuery("findByOtp");
 		query.setParameter("ott", otp);
-		UserDto find = (UserDto) query.getSingleResult();
+		UserDto find =  (UserDto) query.getSingleResult();
 		return find;
 		
 	}

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>save Records</title>
+<title>ViewUser</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -59,22 +59,88 @@ body {
 	background-color: rgb(6, 6, 224);
 	/* Add any other styling you need for the button */
 }
+
 table {
-    background-color: white; /* Set the background color to white */
-    color: black; /* Set the text color to black */
-  }
-  
-  table th, table td {
-    border: 1px solid #08ead3; /* Add a border to table cells */
-  }
-  
-  
+	background-color: #000; /* Set the background color to white */
+	color: black; /* Set the text color to black */
+}
+
+table th, table td {
+	border: 1px solid #08ead3; /* Add a border to table cells */
+}
+
+.logout-link {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: black;
+}
+
+.navbar {
+	height: 60px; /* Adjust the height as needed */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+	color: black; /* Text color */
+	font-size: 20px; /* Text size */
+}
+
+.logo img {
+	max-height: 90px; /* Adjust the logo image size as needed */
+	margin-right: 10px; /* Add some spacing to the right of the logo */
+	margin-top: 40px;
+}
+
+#myCard {
+	width: 400px;
+	border: 10px solid #000;
+	padding: 50px;
+	margin: 20px;
+	background-image: radial-gradient(circle at 30% 86%, rgba(255, 255, 255, 0.03)
+		0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
+		radial-gradient(circle at 55% 100%, rgba(255, 255, 255, 0.03) 0%,
+		rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
+		radial-gradient(circle at 40% 75%, rgba(255, 255, 255, 0.03) 0%,
+		rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
+		radial-gradient(circle at 7% 99%, rgba(255, 255, 255, 0.03) 0%,
+		rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
+		radial-gradient(circle at 69% 76%, rgba(255, 255, 255, 0.03) 0%,
+		rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
+		radial-gradient(circle at 2% 35%, rgba(255, 255, 255, 0.03) 0%,
+		rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
+		radial-gradient(circle at 14% 48%, rgba(255, 255, 255, 0.03) 0%,
+		rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
+		radial-gradient(circle at 28% 87%, rgba(255, 255, 255, 0.04) 0%,
+		rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
+		radial-gradient(circle at 65% 14%, rgba(255, 255, 255, 0.04) 0%,
+		rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
+		radial-gradient(circle at 51% 36%, rgba(255, 255, 255, 0.04) 0%,
+		rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
+		radial-gradient(circle at 6% 93%, rgba(255, 255, 255, 0.04) 0%,
+		rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
+		linear-gradient(135deg, rgb(23, 233, 173), rgb(29, 24, 208));
+}
+
+.card-title {
+	color:#000;
+	/* Set the color of the "LAND OWNER DETAILS" heading to grey */
+	font-weight: bold; /* Make the text bold */
+}
+
+.card-subtitle {
+	color: #000; /* Set the color of the details to black */
+}
+.card-body{
+color: #000;
+}
+
 </style>
 <script type="text/javascript">
 	function populateDropdowns() {
 		var selectedState = document.getElementById("state");
 		var districtDropdown = document.getElementById("district");
-		var talukDropdown = document.getElementById("taluk"); // Fix this line
+		var talukDropdown = document.getElementById("taluk");
 		var postDropdown = document.getElementById("post");
 		var villageDropdown = document.getElementById("village");
 
@@ -320,304 +386,319 @@ table {
 	}
 </script>
 
-
 </head>
 <body>
+	<div class="navbar">
+		<div class="logo">
+			<img
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Seal_of_Karnataka.svg/1200px-Seal_of_Karnataka.svg.png">
 
 
-	<li class="nav-item"><a class="nav-link" href="UserSignIn.jsp">LogOut</a>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="logout-link"
+					href="UserSignIn.jsp">LogOut</a></li>
+			</ul>
+		</div>
+	</div>
+	<br>
+	<h1 align="center">Bhoomi Online|Land Records|View</h1>
+	<br>
+	<br>
+	<h3>Records of Rights,Tenancy & Crops(RTC) Form 16 | Mutation
+		Register | Mutation Status</h3>
+	<div class="d-flex align-items-center justify-content-start">
+		<!-- Icon -->
+		<a class="text-reset me-3" href="#"> <i
+			class="fas fa-shopping-cart text-white"></i>
+		</a>
 
-		<!-- Left links --> <!-- Right elements -->
-		<div class="d-flex align-items-center justify-content-start">
-			<!-- Icon -->
-			<a class="text-reset me-3" href="#"> <i
-				class="fas fa-shopping-cart text-white"></i>
-			</a>
+	</div>
+	<!-- Right elements -->
+	</div>
+	<!-- Collapsible wrapper -->
+	</div>
+	<!-- Container wrapper -->
+	</nav>
+	<!-- Navbar -->
+	<div class="container">
 
-		</div> <!-- Right elements -->
-		</div> <!-- Collapsible wrapper -->
-		</div> <!-- Container wrapper -->
-		</nav> <!-- Navbar -->
-		<div class="container">
 
-			<div class="container">
 
-				<br>
-				<h1 align="center">Bhoomi Online|Land Records|View</h1>
-				<br> <br>
-				<h3>Records of Rights,Tenancy & Crops(RTC) Form 16 | Mutation
-					Register | Mutation Status</h3>
-				<br>
-				<h5 style="color: red">${Read}</h5>
-				<h5 style="color: red">${Reading}</h5>
+		<br>
+		<form class="view" action="viewUser" method="post">
+			<div class="form-row">
+				<div class="col">
 
-				<br>
-				<form class="view" action="viewUser" method="post">
-					<div class="form-row">
-						<div class="col">
+					<label class="form-lbl">State</label> <select class="form-control"
+						id="state" name="state" onchange="populateDropdowns()" required>
+						<option value="">Select State</option>
+						<option value="Karnataka">Karnataka</option>
 
-							<label class="form-lbl">State</label> <select
-								class="form-control" id="state" name="state"
-								onchange="populateDropdowns()" required>
-								<option value="">Select State</option>
-								<option value="Karnataka">Karnataka</option>
+					</select>
 
-							</select>
+				</div>
+				<div class="col">
 
-						</div>
-						<div class="col">
+					<label for="district" class="form-lbl">District</label> <select
+						id="district" class="form-control" name="district" required>
 
-							<label for="district" class="form-lbl">District</label> <select
-								id="district" class="form-control" name="district" required>
+						<option value="">Select District</option>
+						<option value="Bangalore">Bangalore</option>
+						<option value="Chitadurga">Chitadurga</option>
+						<option value="Tumkur">Tumkur</option>
 
-								<option value="">Select District</option>
-								<option value="Bangalore">Bangalore</option>
-								<option value="Chitadurga">Chitadurga</option>
-								<option value="Tumkur">Tumkur</option>
+					</select>
 
-							</select>
+				</div>
+				<div class="col">
 
-						</div>
-						<div class="col">
+					<label for="taluk" class="form-lbl">Taluk</label> <select
+						id="taluk" class="form-control" name="taluk" required>
+						<option value="">Select taluk</option>
+						<option value="Yallanka">Yallanka</option>
+						<option value="BBMP">BBMP</option>
+						<option value="Nelamangala">Nelamangala</option>
+						<option value="Chikkabalapur">Chikkabalapur</option>
 
-							<label for="taluk" class="form-lbl">Taluk</label> <select
-								id="taluk" class="form-control" name="taluk" required>
-								<option value="">Select taluk</option>
-								<option value="Yallanka">Yallanka</option>
-								<option value="BBMP">BBMP</option>
-								<option value="Nelamangala">Nelamangala</option>
-								<option value="Chikkabalapur">Chikkabalapur</option>
 
 
+						<option value="Hosadurga">Hosadurga</option>
+						<option value="Holalkere">Holalkere</option>
+						<option value="Hiriyur">Hiriyur</option>
+						<option value="Huliyar">Huliyar</option>
 
-								<option value="Hosadurga">Hosadurga</option>
-								<option value="Holalkere">Holalkere</option>
-								<option value="Hiriyur">Hiriyur</option>
-								<option value="Huliyar">Huliyar</option>
 
+						<option value="Sira">Sira</option>
+						<option value="Kunigal">Kunigal</option>
+						<option value="Gubbi">Gubbi</option>
+						<option value="Tiptur">Tiptur</option>
 
-								<option value="Sira">Sira</option>
-								<option value="Kunigal">Kunigal</option>
-								<option value="Gubbi">Gubbi</option>
-								<option value="Tiptur">Tiptur</option>
 
 
+					</select>
 
-							</select>
+				</div>
 
-						</div>
+				<div class="col">
 
-						<div class="col">
+					<label class="form-lbl" for="post"> Post</label> <select
+						class="form-control" name="post" id="post" required>
+						<option value="">Select post</option>
 
-							<label class="form-lbl" for="post"> Post</label> <select
-								class="form-control" name="post" id="post" required>
-								<option value="">Select post</option>
+						<option value="Yallanka1">Yallanka1</option>
+						<option value="Yallanka2">Yallanka2</option>
 
-								<option value="Yallanka1">Yallanka1</option>
-								<option value="Yallanka2">Yallanka2</option>
+						<option value="BBMP1">BBMP1</option>
+						<option value="BBMP2">BBMP2</option>
 
-								<option value="BBMP1">BBMP1</option>
-								<option value="BBMP2">BBMP2</option>
 
+						<option value="Nelamangala1">Nelamangala1</option>
+						<option value="Nelamangala2">Nelamangala2</option>
 
-								<option value="Nelamangala1">Nelamangala1</option>
-								<option value="Nelamangala2">Nelamangala2</option>
+						<option value="Chikkabalapur1">Chikkabalapur1</option>
+						<option value="Chikkabalapur2">Chikkabalapur2</option>
 
-								<option value="Chikkabalapur1">Chikkabalapur1</option>
-								<option value="Chikkabalapur2">Chikkabalapur2</option>
 
 
 
+						<option value="Hosadurga1">Hosadurga1</option>
+						<option value="Hosadurga2">Hosadurga2</option>
 
-								<option value="Hosadurga1">Hosadurga1</option>
-								<option value="Hosadurga2">Hosadurga2</option>
+						<option value="Holalkere1">Holalkere1</option>
+						<option value="Holalkere2">Holalkere2</option>
 
-								<option value="Holalkere1">Holalkere1</option>
-								<option value="Holalkere2">Holalkere2</option>
 
 
+						<option value="Hiriyur1">Hiriyur1</option>
+						<option value="Hiriyur2">Hiriyur2</option>
 
-								<option value="Hiriyur1">Hiriyur1</option>
-								<option value="Hiriyur2">Hiriyur2</option>
+						<option value="Huliyar1">Huliyar1</option>
+						<option value="Huliyar2">Huliyar2</option>
 
-								<option value="Huliyar1">Huliyar1</option>
-								<option value="Huliyar2">Huliyar2</option>
 
+						<option value="Sira1">Sira1</option>
+						<option value="Sira2">Sira2</option>
 
-								<option value="Sira1">Sira1</option>
-								<option value="Sira2">Sira2</option>
 
+						<option value="Kunigal1">Kunigal1</option>
+						<option value="Kunigal2">Kunigal2</option>
 
-								<option value="Kunigal1">Kunigal1</option>
-								<option value="Kunigal2">Kunigal2</option>
 
+						<option value="Gubbi1">Gubbi1</option>
+						<option value="Gubbi2">Gubbi2</option>
 
-								<option value="Gubbi1">Gubbi1</option>
-								<option value="Gubbi2">Gubbi2</option>
 
+						<option value="Tiptur2">Tiptur2</option>
 
-								<option value="Tiptur2">Tiptur2</option>
 
 
 
+					</select>
 
-							</select>
+				</div>
+				<div class="col">
 
-						</div>
-						<div class="col">
+					<label class="form-lbl" for="village">Village</label> <select
+						class="form-control select2" name="village" id="village" required>
+						<option value="">Select village</option>
+						<option value="Kodigehalli">Kodigehalli</option>
+						<option value="Sanjeeveni">Sanjeeveni</option>
+						<option value="MaruthiNagar">MaruthiNagar</option>
+						<option value="Amrutha Halli">Amrutha Halli</option>
 
-							<label class="form-lbl" for="village">Village</label> <select
-								class="form-control select2" name="village" id="village"
-								required>
-								<option value="">Select village</option>
-								<option value="Kodigehalli">Kodigehalli</option>
-								<option value="Sanjeeveni">Sanjeeveni</option>
-								<option value="MaruthiNagar">MaruthiNagar</option>
-								<option value="Amrutha Halli">Amrutha Halli</option>
 
+						<option value="Sadhashivnagar">Sadhashivnagar</option>
+						<option value="Mathikere">Mathikere</option>
+						<option value="BEL">BEL</option>
+						<option value="Vidyaranyapura">Vidyaranyapura</option>
 
-								<option value="Sadhashivnagar">Sadhashivnagar</option>
-								<option value="Mathikere">Mathikere</option>
-								<option value="BEL">BEL</option>
-								<option value="Vidyaranyapura">Vidyaranyapura</option>
+						<option value="Dabaspete">Dabaspete</option>
+						<option value="Jalahalli">Jalahalli</option>
+						<option value="8THmaili">8THmaili</option>
+						<option value="peenya">peenya</option>
 
-								<option value="Dabaspete">Dabaspete</option>
-								<option value="Jalahalli">Jalahalli</option>
-								<option value="8THmaili">8THmaili</option>
-								<option value="peenya">peenya</option>
+						<option value="Rajankunte">Rajankunte</option>
+						<option value="Koratgere">Koratgere</option>
+						<option value="Gowribudhanur">Gowribudhanur</option>
+						<option value="Gowripura">Gowripura</option>
 
-								<option value="Rajankunte">Rajankunte</option>
-								<option value="Koratgere">Koratgere</option>
-								<option value="Gowribudhanur">Gowribudhanur</option>
-								<option value="Gowripura">Gowripura</option>
+						<option value="CBkere">CBkere</option>
+						<option value="Kanchipura">Kanchipura</option>
+						<option value="Handpost">Handpost</option>
+						<option value="Kellod">Kellod</option>
 
-								<option value="CBkere">CBkere</option>
-								<option value="Kanchipura">Kanchipura</option>
-								<option value="Handpost">Handpost</option>
-								<option value="Kellod">Kellod</option>
+						<option value="Devigere">Devigere</option>
+						<option value="Mavinakatte">Mavinakatte</option>
+						<option value="Holalkerepost">Holalkerepost</option>
+						<option value="Shivni">Shivni</option>
 
-								<option value="Devigere">Devigere</option>
-								<option value="Mavinakatte">Mavinakatte</option>
-								<option value="Holalkerepost">Holalkerepost</option>
-								<option value="Shivni">Shivni</option>
+						<option value="Marikanive">Marikanive</option>
+						<option value="Hiriyurpost">Hiriyurpost</option>
+						<option value="Golralli">Golralli</option>
+						<option value="Madhikatte">Madhikatte</option>
 
-								<option value="Marikanive">Marikanive</option>
-								<option value="Hiriyurpost">Hiriyurpost</option>
-								<option value="Golralli">Golralli</option>
-								<option value="Madhikatte">Madhikatte</option>
+						<option value="Yalnodu">Yalnodu</option>
+						<option value="Huliyarpost">Huliyarpost</option>
+						<option value="HuliyarGate">HuliyarGate</option>
+						<option value="Batrahalli">Batrahalli</option>
 
-								<option value="Yalnodu">Yalnodu</option>
-								<option value="Huliyarpost">Huliyarpost</option>
-								<option value="HuliyarGate">HuliyarGate</option>
-								<option value="Batrahalli">Batrahalli</option>
 
 
 
+						<option value="Kallabella">Kallabella</option>
+						<option value="Bukkapatna">Bukkapatna</option>
+						<option value="Bukkapatanpost">Bukkapatanpost</option>
+						<option value="Madhuri">Madhuri</option>
 
-								<option value="Kallabella">Kallabella</option>
-								<option value="Bukkapatna">Bukkapatna</option>
-								<option value="Bukkapatanpost">Bukkapatanpost</option>
-								<option value="Madhuri">Madhuri</option>
+						<option value="Kunigal1Kudhurai">Kunigal1Kudhurai</option>
+						<option value="Golla">Golla</option>
+						<option value="KunigalTown">KunigalTown</option>
+						<option value="Kunigalroad">Kunigalroad</option>
 
-								<option value="Kunigal1Kudhurai">Kunigal1Kudhurai</option>
-								<option value="Golla">Golla</option>
-								<option value="KunigalTown">KunigalTown</option>
-								<option value="Kunigalroad">Kunigalroad</option>
 
+						<option value="GubbiRoad">GubbiRoad</option>
+						<option value="NandhiRoad">NandhiRoad</option>
+						<option value="GubbiTown">GubbiTown</option>
+						<option value="Gubbigate">Gubbigate</option>
 
-								<option value="GubbiRoad">GubbiRoad</option>
-								<option value="NandhiRoad">NandhiRoad</option>
-								<option value="GubbiTown">GubbiTown</option>
-								<option value="Gubbigate">Gubbigate</option>
+						<option value="KB Gate">KB Gate</option>
+						<option value="ChikkanayakanahalliPost">ChikkanayakanahalliPost</option>
 
-								<option value="KB Gate">KB Gate</option>
-								<option value="ChikkanayakanahalliPost">ChikkanayakanahalliPost</option>
+					</select>
+				</div>
 
-							</select>
-						</div>
+				<div class="col-md-3"
+					style="padding-right: 100px; padding-left: 100px">
+					<label class="form-lbl"> . </label>
+					<button type="submit" class="form-control btn btn-primary">Go</button>
+				</div>
+			</div>
 
-						<div class="col-md-3"
-							style="padding-right: 100px; padding-left: 100px">
-							<label class="form-lbl"> . </label>
-							<button type="submit" class="form-control btn btn-primary">Fetch</button>
-						</div>
-					</div>
+		</form>
+		<br> <br>
+		<form id="card" action="shdefault" method="post">
 
-				</form>
-				<br> <br>
-				<form id="card" action="Card" method="post">
+			<div class="row">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;
 
-					<div class="row">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;
+				<div class="col-md-3" style="width: 140px">
+					<fieldset class="form-group">
+						<label class="form-lbl">Surve Number</label> <select
+							name="serveNumber" class="form-control" id="serveNumber">
+							<option value="">SELECT A SURVE NUMBER</option>
+							<c:forEach var="list" items="${view}">
+								<option value="${list.serveNumber}">${list.serveNumber}</option>
+							</c:forEach>
+						</select>
+					</fieldset>
+				</div>
 
-						<div class="col-md-3" style="width: 140px">
-							<fieldset class="form-group">
-								<label class="form-lbl">Surve Number</label> <select
-									name="serveNumber" class="form-control" id="serveNumber">
-									<option value="">SELECT A SERVE NUMBER</option>
-									<c:forEach var="record" items="${view}">
-										<option value="${record.serveNumber}">${record.serveNumber}</option>
-									</c:forEach>
-								</select>
+				<div class="col-md-3" style="width: 140px">
+					<fieldset class="form-group">
+						<label class="form-lbl">Hissa Number</label> <select
+							name="hissaNumber" class="form-control" id="hissaNumber">
+							<option value="">SELECT A HISSA NUMBER</option>
+							<c:forEach var="list" items="${view}">
+								<option value="${list.hissaNumber}">${list.hissaNumber}</option>
+							</c:forEach>
+						</select>
+					</fieldset>
+				</div>
 
-							</fieldset>
-						</div>
+				<div class="col-md-3"
+					style="padding-right: 100px; padding-left: 100px">
+					<label class="form-lbl"> . </label>
+					<button type="submit" class="form-control btn btn-primary">Go</button>
+				</div>
+			</div>
 
-						<div class="col-md-3" style="width: 140px">
-							<fieldset class="form-group">
-								<label class="form-lbl">Hissa Number</label> <select
-									name="hissaNumber" class="form-control" id="hissaNumber">
-									<option value="">SELECT A HISSA NUMBER</option>
-									<c:forEach var="record" items="${view}">
-										<option value="${record.hissaNumber}">${record.hissaNumber}</option>
-									</c:forEach>
-								</select>
-							</fieldset>
-						</div>
+		</form>
+		<br>
+		<center>
+			<div class="col-md-2">
+				<button type="button" class="form-control btn btn-primary"
+					id="showCard" style="align-items: center;">Fetch</button>
+			</div>
+		</center>
+	</div>
+	<br>
 
-						<table class="table table-bordered">
-							<thead class="thead-dark">
-								<tr>
-									<th scope="col">Owner Name</th>
-									<th scope="col">Mobile Number</th>
-									<th scope="col">Aadhar Number</th>
-									<th scope="col">Year</th>
-									<th scope="col">EDIT</th>
-									<th scope="col">DELETE</th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- Add your table rows here using a loop or by manually adding data -->
-								<c:forEach var="record" items="${view}">
-								<tr>
-									<td>${record.ownerName}</td>
-									<td>${record.mobileNumber}</td>
-									<td>${record.aadharNumber}</td>
-									<td>${record.year}</td>
-									<td><a class="btn btn-primary" href="#" role="button">EDIT</a></td>
-									<td><a class="btn btn-danger" id="delete" href="#"
-										role="button">DELETE</a></td>
-								</tr>
-								<!-- Add more rows as needed -->
-								</c:forEach>
-							</tbody>
-						
+	<center>
+		<div class="card" id="myCard" style="display: none;">
+			<div class="card-body" style="color: #000;">
+			 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Seal_of_Karnataka.svg/1200px-Seal_of_Karnataka.svg.png" alt="Karnataka Seal" style="max-width: 30%; height: 100px;">
+				<h5 class="card-title">LAND OWNER DETAILS</h5>
+				<h6 class="card-subtitle mb-2 text-muted" style="color: #000;">OWNER NAME:
+					${forloop.ownerName}</h6>
+				<h6 class="card-subtitle mb-2 text-muted" style="color: #000;">AADHAR NUMBER:
+					${forloop.aadharNumber}</h6>
+				<h6 class="card-subtitle mb-2 text-muted" style="color: #000;">MOBILE NUMBER:
+					${forloop.mobileNumber}</h6>
+				<h6 class="card-subtitle mb-2 text-muted" style="color: #000;">YEAR OF
+					REGISTERATION: ${forloop.year}</h6>
+			</div>
+		</div>
+	</center>
 
 
-							
-					
-					</table>
-				</form>
-				
-			
 
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-			<script
-				src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		document.getElementById("showCard").addEventListener("click",
+				function() {
+					$("#myCard").show();
 
-			
+					setTimeout(function() {
+						$("#myCard").hide();
+					}, 15000);
+
+				});
+	</script>
+
 </body>
 </html>

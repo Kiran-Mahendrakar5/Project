@@ -28,7 +28,7 @@ public interface LandRecordsRepo {
 	public	boolean updateDetailsByHissaAndSurveyNumber(String ownerName, String mobileNumber, String aadharNumber, String year,
 			String hissaNumber, String serveNumber, int status);
 	
-	public LandRecordsDtoOne ifExist(String hissaNumber , String serveNumber , int status);
+	public LandRecordsDtoOne ifExist(String hissaNumber , String serveNumber);
 	
 	public boolean updateStatus(String hissaNumber, String serveNumber);
 	

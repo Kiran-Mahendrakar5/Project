@@ -12,7 +12,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -22,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.xworkz.landrecords.dto.LandRecordsDto;
 import com.xworkz.landrecords.dto.UserDto;
 import com.xworkz.landrecords.repo.UserRepository;
 
@@ -131,15 +134,33 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean checkotp(String email, Model model) {
-		UserDto findemail = findByEmail(email, model);
-		if (findemail != null) {
-			String otp = randomotp(6);
-			System.out.println(otp);
-			model.addAttribute("checkotp", otp);
+//		UserDto findemail = findByEmail(email, model);
+//		if (findemail != null) {
+//			String otp = randomotp(6);
+//			System.out.println(otp);
+//			model.addAttribute("checkotp", otp);
+//			return true;
+//		}
+//		return false;
+//	}
+//		if (email != null && !email.isEmpty()) {
+			UserDto  dto = findByEmail(email, model);
+			if (dto != null) {
+				String otp = randomotp(6);
+				model.addAttribute("checkotp", otp);
+				System.out.println("otp is a otp " + otp);
+				boolean update = Repo.updateOtpByEmail(otp, email);
+				System.out.println(update);
+				boolean sender = senderOtp(otp, email);
+				return true;
 
+			}
+			System.out.println("not updated");
+			return false;
 		}
-		return false;
-	}
+//		model.addAttribute("email", "email is not valid");
+//		return false;
+//	}
 
 
 //	public UserDto findByOtp(String otp, Model models) {
@@ -169,10 +190,10 @@ public class UserServiceImpl implements UserService {
 //	}
 	@Override
 	public UserDto findByOtp(String otp, Model models) {
-	    if (otp != null) {
+//	    if (otp != null) {
 	        try {
 	            UserDto findOtp = Repo.findByOtp(otp);
-	            if (findOtp != null && findOtp.getOtp().equals(otp)) {
+	            if (findOtp.getOtp().equals(otp)) {
 	                return findOtp;
 	            } else {
 	                models.addAttribute("notfindotp", "OTP not matched");
@@ -182,11 +203,11 @@ public class UserServiceImpl implements UserService {
 	            models.addAttribute("notfindotp", "OTP not found");
 	            return null;
 	        }
-	    } else {
-	        models.addAttribute("notfindotp", "OTP is null");
-	        return null;
+//	    } else {
+//	        models.addAttribute("notfindotp", "OTP is null");
+//	        return null;
 	    }
-	}
+//	}
 
 	@Override
 	public boolean senderOtp(String otp, String email) {
@@ -252,8 +273,21 @@ public class UserServiceImpl implements UserService {
 		return false;
 		
 	}
+
+	@Override
+	public boolean updateOtpByEmail(String otp, String email) {
+			if(email!=null) {
+				
+			boolean update = Repo.updateOtpByEmail(otp, email);
+			return update;
+			}
+		
+		return false;
+	}
+	
 	
 
 }
+
 
 

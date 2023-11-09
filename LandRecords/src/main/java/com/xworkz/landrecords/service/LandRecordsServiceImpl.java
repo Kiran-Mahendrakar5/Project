@@ -327,10 +327,10 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 	}
 
 	@Override
-	public LandRecordsDtoOne ifExist(String hissaNumber, String serveNumber, int status, Model model) {
+	public LandRecordsDtoOne ifExist(String hissaNumber, String serveNumber, Model model) {
 		if (hissaNumber != null && !hissaNumber.isEmpty()) {
 			if (serveNumber != null && !serveNumber.isEmpty()) {
-				return repo.ifExist(hissaNumber, serveNumber, 0);
+				return repo.ifExist(hissaNumber, serveNumber);
 			}
 			return null;
 		}

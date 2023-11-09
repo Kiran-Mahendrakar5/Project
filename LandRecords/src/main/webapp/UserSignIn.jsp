@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>I-Wallet LogIn</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 
 <style type="text/css">
 * {
@@ -266,10 +269,29 @@ footer {
 footer p {
 	margin: 0; /* Remove the default margin for <p> elements */
 }
+.previous {
+  
+  color: black;
+  text-decoration: none; /* To remove the underline on the link */
+  position: absolute;
+  top: 10px; /* Adjust the top position as needed */
+  left: 10px; /* Adjust the left position as needed */
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 24px; /* Adjust the font size as needed */
+}
+
+.previous:hover {
+  background-color: #aqua;; /* Change the background color on hover if desired */
+}
+
+.round {
+  border-radius: 50%;
+}
+
 </style>
 
 <script type="text/javascript">
-
 document.getElementById("loginForm").addEventListener("submit", function(event) {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
@@ -282,8 +304,15 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
 </script>
 
 
+
 </head>
 <body>
+
+<body>
+  <a href="User.jsp" class="previous round">&#8249;</a>
+  <!-- Rest of your HTML code -->
+</body>
+
 
 	<div class="container">
 		<div class="left">
@@ -293,17 +322,19 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
 				<h4 class="animation a2">Log in to your account using email and
 					password</h4>
 			</div>
-			<form action="uLogin" method="post">
+			<form id="loginForm" action="uLogin" method="post">
 				<div class="form">
 					<input type="email" name="email" class="form-field animation a3"
 						placeholder="Email Address"> <input type="password"
 						name="password" class="form-field animation a4" placeholder="Password">
 
-
+                    
 					<button type="submit" class="animation a6" id="signInButton">SignIn</button>
+				
 					<p class="animation a5" style="text-align: center;">
 						<a href="ForgetPassward.jsp">Forgot Password</a>
 					</p>
+					<h2>${entre}</h2>
 			</form>
 
 
@@ -311,10 +342,6 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
 	</div>
 	<div class="right"></div>
 	</div>
-
-	<footer>
-		<p>&copy; 2023 My Website. All rights reserved.</p>
-	</footer>
 
 </body>
 </html>
