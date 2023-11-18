@@ -72,7 +72,6 @@ body {
 	text-align: center;
 	padding: 20px;
 	margin: 10px;
-	
 }
 
 .centered-row input[type="email"], .centered-row input[type="password"]
@@ -95,9 +94,8 @@ body {
 	border-radius: 5px;
 	cursor: pointer;
 	font-size: 14px; /* Reduced font size */
-	  width: 50%;
+	width: 50%;
 }
-
 </style>
 </head>
 <body>
@@ -114,13 +112,15 @@ body {
 	</div>
 
 	<div class="centered-row">
-		
+
 		<form action="updatePasswords" method="post">
+
 			<input type="email" name="email" placeholder="Enter your Email">
 			<h5 style="color: red;">${Email}</h5>
 			<input type="password" name="password" placeholder="New Password">
 			<input type="password" name="confirmPassword"
 				placeholder="Confirm Password">
+
 			<button type="submit">UPDATE</button>
 		</form>
 	</div>

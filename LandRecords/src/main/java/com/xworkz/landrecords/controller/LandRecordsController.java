@@ -1,14 +1,19 @@
 package com.xworkz.landrecords.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.xworkz.landrecords.dto.LandRecordsDto;
 import com.xworkz.landrecords.dto.LandRecordsDtoOne;
@@ -61,7 +66,7 @@ public class LandRecordsController {
 		System.out.println(dto);
 		if (dto != null) {
 			System.out.println("Otp is verified");
-			 model.addAttribute("userName", dto.getAdminName());
+			model.addAttribute("userName", dto.getAdminName());
 			model.addAttribute("otp", otp);
 
 			return "AddResolver";
@@ -150,7 +155,7 @@ public class LandRecordsController {
 	}
 
 	@RequestMapping(value = "/UserRecords", method = RequestMethod.POST)
-	public String registration(UserDto dto, Model model) {
+	public String registration(UserDto dto, Model model) throws NullPointerException, Exception {
 		boolean saved = userService.saveUserDetails(dto, model);
 		System.out.println(saved);
 
@@ -166,7 +171,7 @@ public class LandRecordsController {
 
 	@RequestMapping(value = "/uLogin", method = RequestMethod.POST)
 	public String uLogin(@RequestParam String email, @RequestParam String password, Model model) {
-		UserDto logIn = userService.ifExistss(email, password, model);
+		UserDto logIn = userService.logIn(email, password, model);
 		System.out.println(logIn);
 		if (logIn != null) {
 			model.addAttribute("Login", "Login Successful");
@@ -176,7 +181,7 @@ public class LandRecordsController {
 	}
 
 	@RequestMapping(value = "/ForgetPassward", method = RequestMethod.POST)
-	public String verify(@RequestParam String email, Model model) {
+	public String verify(@RequestParam String email, Model model) throws Exception {
 
 		boolean sign = userService.checkotp(email, model);
 		if (sign) {
@@ -186,7 +191,7 @@ public class LandRecordsController {
 		}
 		System.out.println("forgetpassward1");
 		return "ForgetPassward";
-		
+
 	}
 
 	@RequestMapping(value = "/checksotp", method = RequestMethod.POST)
@@ -201,17 +206,22 @@ public class LandRecordsController {
 		return "ForgetPassward";
 	}
 
-
 	@RequestMapping(value = "/updatePasswords", method = RequestMethod.POST)
-	public String updatePassword(@RequestParam String email, @RequestParam String password,
-			@RequestParam String confirmPassword, Model model) {
+	public String updatePassword(@RequestParam String password, @RequestParam String confirmPassword,
+			@RequestParam String email, Model model) throws Exception {
+		System.out.println("Controller method called");
+		System.out.println("Email: " + email);
+		System.out.println("Password: " + password);
+		System.out.println("Confirm Password: " + confirmPassword);
 		boolean update = userService.updatePasswords(password, confirmPassword, email, model);
 		if (update) {
 			model.addAttribute("update", "Password Updated Successfully");
 			return "ViewUser";
 		}
+		System.out.println("not updated");
 		return "UpdatePassward";
 	}
+
 
 	@RequestMapping(value = "/viewUser", method = RequestMethod.POST)
 	public String viewUser(@RequestParam String village, Model model) {
@@ -228,8 +238,8 @@ public class LandRecordsController {
 	}
 
 	@RequestMapping(value = "/shdefault", method = RequestMethod.POST)
-	public String userView(@RequestParam String  hissaNumber, @RequestParam String serveNumber, Model model) {
-		LandRecordsDtoOne data =service.ifExist(hissaNumber, serveNumber, model);
+	public String userView(@RequestParam String hissaNumber, @RequestParam String serveNumber, Model model) {
+		LandRecordsDtoOne data = service.ifExist(hissaNumber, serveNumber, model);
 		if (data != null) {
 			model.addAttribute("forloop", data);
 			System.out.println("Data is Present");
@@ -238,5 +248,7 @@ public class LandRecordsController {
 		model.addAttribute("Reading", "No Records found");
 		return "ViewUser";
 	}
+	
+	
 
 }

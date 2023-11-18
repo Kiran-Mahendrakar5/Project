@@ -120,7 +120,6 @@ text-decoration: none;
 }
 
 a:link, a:visited {
-background-color: rgb(5, 236, 224);
 color: white;
 padding: 14px 20px;
 text-align: center;

@@ -6,7 +6,7 @@ import com.xworkz.landrecords.dto.UserDto;
 
 public interface UserRepository {
 	
-	public boolean saveUserDetails(UserDto dto);
+public boolean saveUserDetails(UserDto dto);
 	
 	public UserDto ifExistss(String email, String password, Model model);
 	
@@ -18,7 +18,9 @@ public interface UserRepository {
 	
 	public UserDto passwordExists(String password);
 	
-	public boolean updatePasswords(String password, String Passwords, String email, Model model);
+	public boolean updatePasswords(String password, String confirmPassword, String email, Model model);
+	
+	
 	
 	
 	

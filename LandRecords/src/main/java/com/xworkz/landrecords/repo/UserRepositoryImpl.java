@@ -74,15 +74,32 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 
+//	@Override
+//	public UserDto emailExists(String email) {
+//		EntityManager em = emf.createEntityManager();
+//		Query query = em.createNamedQuery("emailExists");
+//		query.setParameter("email", email);
+//		UserDto dtos = (UserDto) query.getSingleResult();
+//		return dtos;
+//		
+//	}
 	@Override
 	public UserDto emailExists(String email) {
-		EntityManager em = emf.createEntityManager();
-		Query query = em.createNamedQuery("emailExists");
-		query.setParameter("email", email);
-		UserDto dtos = (UserDto) query.getSingleResult();
-		return dtos;
-		
+	    EntityManager em = emf.createEntityManager();
+	    try {
+	        Query query = em.createNamedQuery("emailExists");
+	        query.setParameter("email", email);
+	        UserDto dtos = (UserDto) query.getSingleResult();
+	        return dtos;
+	    } catch (NoResultException e) {
+	        // Log the exception or handle it based on your application's requirements
+	        // For example, you can return null or throw a custom exception
+	        return null; // or throw new CustomNotFoundException("User with email " + email + " not found");
+	    } finally {
+	        em.close(); // Close the EntityManager in a finally block to ensure proper resource cleanup
+	    }
 	}
+
 
 	@Override
 	public boolean updateOtpByEmail(String otp, String email) {
@@ -108,23 +125,40 @@ public class UserRepositoryImpl implements UserRepository {
 		
 	}
 
+//	@Override
+//	public UserDto passwordExists(String password) {
+//		EntityManager em = emf.createEntityManager();
+//		Query query = em.createNamedQuery("passwordExists");
+//		query.setParameter("passwor", password);
+//		UserDto pasexit = (UserDto) query.getSingleResult();
+//		return pasexit;
+//		
+//	}
 	@Override
 	public UserDto passwordExists(String password) {
-		EntityManager em = emf.createEntityManager();
-		Query query = em.createNamedQuery("passwordExists");
-		query.setParameter("passwor", password);
-		UserDto pasexit = (UserDto) query.getSingleResult();
-		return pasexit;
-		
+	    EntityManager em = emf.createEntityManager();
+	    try {
+	        Query query = em.createNamedQuery("passwordExists");
+	        query.setParameter("passwor", password);
+	        UserDto passexit = (UserDto) query.getSingleResult();
+	        return passexit;
+	    } catch (NoResultException e) {
+	        // Log the exception or handle it based on your application's requirements
+	        // For example, you can return null or throw a custom exception
+	        return null; // or throw new CustomNotFoundException("User with password " + password + " not found");
+	    } finally {
+	        em.close(); // Close the EntityManager in a finally block to ensure proper resource cleanup
+	    }
 	}
 
+
 	@Override
-	public boolean updatePasswords(String password, String Passwords, String email, Model model) {
+	public boolean updatePasswords(String password, String confirmPassword, String email, Model model) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Query query = em.createNamedQuery("updatePasswords");
 		query.setParameter("passd", password);
-		query.setParameter("cpassd", Passwords);
+		query.setParameter("cpassd", confirmPassword);
 		query.setParameter("email", email);
 		query.executeUpdate();
 		em.getTransaction().commit();

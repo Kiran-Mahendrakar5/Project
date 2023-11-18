@@ -3,154 +3,119 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>ADD RESOLVER</title>
-<style type="text/css">
-a:link, a:visited {
-	background-color: #FF7518;
-	color: white;
-	padding: 14px 20px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-}
+  <meta charset="ISO-8859-1">
+  <title>Bhoomi Online</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-a:hover, a:active {
-	background-color: orange;
-}
+    @import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
 
-body {
-	background-image: radial-gradient(circle at 30% 86%, rgba(255, 255, 255, 0.03)
-		0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
-		radial-gradient(circle at 55% 100%, rgba(255, 255, 255, 0.03) 0%,
-		rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
-		radial-gradient(circle at 40% 75%, rgba(255, 255, 255, 0.03) 0%,
-		rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
-		radial-gradient(circle at 7% 99%, rgba(255, 255, 255, 0.03) 0%,
-		rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
-		radial-gradient(circle at 69% 76%, rgba(255, 255, 255, 0.03) 0%,
-		rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
-		radial-gradient(circle at 2% 35%, rgba(255, 255, 255, 0.03) 0%,
-		rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
-		radial-gradient(circle at 14% 48%, rgba(255, 255, 255, 0.03) 0%,
-		rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
-		radial-gradient(circle at 28% 87%, rgba(255, 255, 255, 0.04) 0%,
-		rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
-		radial-gradient(circle at 65% 14%, rgba(255, 255, 255, 0.04) 0%,
-		rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
-		radial-gradient(circle at 51% 36%, rgba(255, 255, 255, 0.04) 0%,
-		rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
-		radial-gradient(circle at 6% 93%, rgba(255, 255, 255, 0.04) 0%,
-		rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
-		linear-gradient(135deg, rgb(23, 233, 173), rgb(29, 24, 208));
-	background-size: cover;
-	height: 300%;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
+    body {
+      background-image: radial-gradient(circle at 30% 86%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
+        radial-gradient(circle at 55% 100%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
+        radial-gradient(circle at 40% 75%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
+        radial-gradient(circle at 7% 99%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
+        radial-gradient(circle at 69% 76%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
+        radial-gradient(circle at 2% 35%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
+        radial-gradient(circle at 14% 48%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 6%, transparent 6%, transparent 94%),
+        radial-gradient(circle at 28% 87%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
+        radial-gradient(circle at 65% 14%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
+        radial-gradient(circle at 51% 36%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
+        radial-gradient(circle at 6% 93%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 4%, transparent 4%, transparent 96%),
+        linear-gradient(135deg, rgb(23, 233, 173), rgb(29, 24, 208));
+      margin: 0;
+      padding: 0;
+    }
 
-.main {
-	width: 100%;
-	background-position: center;
-	background-size: cover;
-	height: 100vh;
-}
+    .navbar {
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      color: black;
+      font-size: 20px;
+    }
 
-.icon {
-	width: 200px;
-	float: left;
-	height: 70px;
-}
+    .logo img {
+      max-height: 90px;
+      margin-right: 10px;
+      margin-top: 45px;
+    }
 
-.menu {
-	width: 400px;
-	float: left;
-	height: 70px;
-	padding-left: -400px;
-}
+    .centered-text {
+      text-align: center;
+      color: black;
+      font-size: 44px;
+      padding: 20px;
+    }
 
-.navbar {
-	width: 1200px;
-	height: 75px;
-	margin: auto;
-}
+    .centered-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
 
-ul {
-	float: left;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+    .centered-column a {
+      display: block;
+      margin: 10px 0;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      background: #007bff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      width: 150px;
+      text-align: center;
+    }
 
-ul li {
-	list-style: none;
-	margin-left: 62px;
-	margin-top: 27px;
-	font-size: 14px;
-}
+    .logi {
+      color: black;
+    }
 
-ul li a {
-	text-decoration: none;
-	color: #fff;
-	font-family: Arial;
-	font-weight: bold;
-	transition: 0.4s ease-in-out;
-}
+    .content {
+      margin-top: 70px;
+      text-align: center;
+    }
 
-ul li a:hover {
-	color: #ff7200;
-}
-
-.content {
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	color: white; /* Set the text color */
-	font-size: 42px; /* Increase the font size as needed */
-    font-weight: bold; /* Make the text bold */
-    margin: 0; /* Remove default margin for h1 */
-	
-}
-
-.content h1 {
-	font-size: 32px; /* Adjust the font size as needed */
-	margin: 0; /* Remove default margin for h1 */
-}
-</style>
+    .content span {
+      position: relative;
+      top: -80px;
+      font-size: 28px; /* Adjust the font size as needed */
+    }
+  </style>
 </head>
 
 <body>
-	<div class="main">
-		<div class="navbar">
-			<div class="icon"></div>
 
-			<div class="menu">
-				<ul>
-
-
-					<li><a class="navbar-brand" id="ADDRECORDS" href="Add.jsp">ADDRECORDS</a></li>
-					<li><a class="navbar-brand" id="VIEWRECORDS"
-						href="OneRead.jsp">VIEWRECORDS</a></li>
-					<li><a class="navbar-brand" id="home" href="Home.jsp">LOGOUT</a></li>
-
-
-				</ul>
-			</div>
-
-		</div>
-
-		<div class="content">
-    <span style="position: relative; top: -80px;">WELCOME ${userName} To Karnataka Bhoomi Land Records RTC</span>
-</div>
-
-		<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-	</div>
+  <div class="navbar">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Seal_of_Karnataka.svg/1200px-Seal_of_Karnataka.svg.png">
+    </div>
+    <ul>
+      <a class="logi" href="Home.jsp">LOGOUT</a>
+    </ul>
+  </div>
+    <div class="content">
+    <span>WELCOME ${userName} To Karnataka Bhoomi Land Records RTC</span>
+  </div>
+ 
+  <div class="centered-column">
+    <a href="Add.jsp">ADD RECORDS</a>
+    <a href="OneRead.jsp">VIEW RECORDS</a>
+  </div>
+  
+ <footer style="background-color: transparent;  text-align: center;" class="footer">
+    <div class="container">
+        <p class="text-white" style="margin-top: 150px;"> <!-- Adjust the margin-top value as needed -->
+            Revenue Department<br> About | Govt Orders & Tenders | RTI Act | Contact Us<br> Copyright © 2023 | Bhoomi Monitoring Cell<br> Release Version: 1.0.0.0
+        </p>
+    </div>
+</footer>
 
 
 </body>
