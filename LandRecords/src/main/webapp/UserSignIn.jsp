@@ -8,7 +8,8 @@
 <title>I-Wallet LogIn</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'
+	crossorigin='anonymous'></script>
 
 
 <style type="text/css">
@@ -169,45 +170,65 @@ keyframes move { 0% {
 100
 
 
+
+
 %
 {
 opacity
 
 
+
+
 :
+
+
 
 
 1
+
+
 ;
-
-
 visibility
 
 
+
+
 :
+
+
 
 
 visible
+
+
 ;
-
-
 transform
+
+
 
 
 :
 
 
+
+
 translateY
+
+
 (
+
+
 
 
 0
 
 
+
+
 )
+
+
 ;
-
-
 }
 }
 @
@@ -219,41 +240,57 @@ keyframes left { 0% {
 100
 
 
+
+
 %
 {
 opacity
 
 
+
+
 :
+
+
 
 
 1
+
+
 ;
-
-
 padding
 
 
+
+
 :
+
+
 
 
 20px
 
 
+
+
 40px
+
+
 ;
-
-
 width
+
+
 
 
 :
 
 
+
+
 440px
+
+
 ;
-
-
 }
 }
 header img {
@@ -269,79 +306,114 @@ footer {
 footer p {
 	margin: 0; /* Remove the default margin for <p> elements */
 }
+
 .previous {
-  
-  color: black;
-  text-decoration: none; /* To remove the underline on the link */
-  position: absolute;
-  top: 10px; /* Adjust the top position as needed */
-  left: 10px; /* Adjust the left position as needed */
-  padding: 10px;
-  border-radius: 50%;
-  font-size: 24px; /* Adjust the font size as needed */
+	color: black;
+	text-decoration: none; /* To remove the underline on the link */
+	position: absolute;
+	top: 10px; /* Adjust the top position as needed */
+	left: 10px; /* Adjust the left position as needed */
+	padding: 10px;
+	border-radius: 50%;
+	font-size: 24px; /* Adjust the font size as needed */
 }
 
 .previous:hover {
-  background-color: #aqua;; /* Change the background color on hover if desired */
+	background-color: #aqua;;
+	/* Change the background color on hover if desired */
 }
 
 .round {
-  border-radius: 50%;
+	border-radius: 50%;
 }
 
+.icons a {
+	text-decoration: none;
+	color: #000;
+}
+
+.icons ion-icon {
+	color: #000;
+	font-size: 30px;
+	padding-left: 14px;
+	padding-top: 5px;
+	transition: 0.3s ease;
+}
+
+.icons ion-icon:hover {
+	color: #04ff00;
+}
+
+.icon {
+	width: 200px;
+	float: left;
+	height: 70px;
+}
 </style>
 
 <script type="text/javascript">
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+	document.getElementById("loginForm").addEventListener("submit",
+			function(event) {
+				var email = document.getElementById("email").value;
+				var password = document.getElementById("password").value;
 
-    if (email.trim() === "" || password.trim() === "") {
-        alert("Please enter both email and password.");
-        event.preventDefault(); // Prevent the form submission
-    }
-});
+				if (email.trim() === "" || password.trim() === "") {
+					alert("Please enter both email and password.");
+					event.preventDefault(); // Prevent the form submission
+				}
+			});
 </script>
 
 
 
 </head>
 <body>
-
 <body>
-  <a href="User.jsp" class="previous round">&#8249;</a>
-  <!-- Rest of your HTML code -->
+	<a href="User.jsp" class="previous round">&#8249;</a>
+	<!-- Rest of your HTML code -->
 </body>
 
 
-	<div class="container">
-		<div class="left">
-			<div class="header">
+<div class="container">
+	<div class="left">
+		<div class="header">
 
-				<h2 class="animation a1">i-Wallet SIGNIN</h2>
-				<h4 class="animation a2">Log in to your account using email and
-					password</h4>
-			</div>
-			<form id="loginForm" action="uLogin" method="post">
-				<div class="form">
-					<input type="email" name="email" class="form-field animation a3"
-						placeholder="Email Address"> <input type="password"
-						name="password" class="form-field animation a4" placeholder="Password">
-
-                    
-					<button type="submit" class="animation a6" id="signInButton">SignIn</button>
-				
-					<p class="animation a5" style="text-align: center;">
-						<a href="ForgetPassward.jsp">Forgot Password</a>
-					</p>
-					<h2>${entre}</h2>
-			</form>
-
-
+			<h2 class="animation a1">i-Wallet SIGNIN</h2>
+			<h4 class="animation a2">Log in to your account using email and
+				password</h4>
 		</div>
-	</div>
-	<div class="right"></div>
-	</div>
+		<form id="loginForm" action="uLogin" method="post">
+			<div class="form">
+				<input type="email" name="email" class="form-field animation a3"
+					placeholder="Email Address"> <input type="password"
+					name="password" class="form-field animation a4"
+					placeholder="Password">
+                  
+                  <h4>${notLogIn}</h4>
+				<button type="submit" class="animation a6" id="signInButton">SignIn</button>
 
+
+
+				<div class="icons">
+					<a href="https://facebook.com"><ion-icon name="logo-facebook"></ion-icon></a>
+					<a href="https://instagram.com"><ion-icon name="logo-instagram"></ion-icon></a>
+					<a href="https://twitter.com"><ion-icon name="logo-twitter"></ion-icon></a>
+					<a href="#"><ion-icon name="logo-google"></ion-icon></a> <a
+						href="https://github.com/"> <ion-icon name="logo-github"></ion-icon>
+					</a>
+				</div>
+
+				<p class="animation a5" style="text-align: center;">
+					<a href="ForgetPassward.jsp">Forgot Password</a>
+				</p>
+				<h2>${Login}</h2>
+		</form>
+
+
+	</div>
+</div>
+<div class="right"></div>
+</div>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 </body>
 </html>

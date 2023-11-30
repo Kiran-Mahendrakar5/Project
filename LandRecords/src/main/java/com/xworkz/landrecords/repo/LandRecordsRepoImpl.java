@@ -103,6 +103,7 @@ public class LandRecordsRepoImpl implements LandRecordsRepo {
 		Query query = em.createNamedQuery("Deleteserve");
 		query.setParameter("hn", hissaNumber);
 		query.setParameter("sn", serveNumber);
+		
 		query.executeUpdate();
 		try {
 			em.getTransaction().commit();

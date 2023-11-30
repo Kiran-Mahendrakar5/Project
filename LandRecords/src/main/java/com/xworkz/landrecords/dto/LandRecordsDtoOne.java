@@ -41,14 +41,14 @@ public class LandRecordsDtoOne implements Serializable{
 	private String serveNumber;
 	private String year;
 	private int status = 0;
-	private String image;
+	
 	public LandRecordsDtoOne() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public LandRecordsDtoOne(int id, String state, String district, String taluk, String post, String village,
 			String ownerName, String mobileNumber, String aadharNumber, String hissaNumber, String serveNumber,
-			String year, int status, String image) {
+			String year, int status) {
 		super();
 		this.id = id;
 		this.state = state;
@@ -63,14 +63,13 @@ public class LandRecordsDtoOne implements Serializable{
 		this.serveNumber = serveNumber;
 		this.year = year;
 		this.status = status;
-		this.image = image;
 	}
 	@Override
 	public String toString() {
 		return "LandRecordsDtoOne [id=" + id + ", state=" + state + ", district=" + district + ", taluk=" + taluk
 				+ ", post=" + post + ", village=" + village + ", ownerName=" + ownerName + ", mobileNumber="
 				+ mobileNumber + ", aadharNumber=" + aadharNumber + ", hissaNumber=" + hissaNumber + ", serveNumber="
-				+ serveNumber + ", year=" + year + ", status=" + status + ", image=" + image + "]";
+				+ serveNumber + ", year=" + year + ", status=" + status + "]";
 	}
 	public int getId() {
 		return id;
@@ -150,13 +149,6 @@ public class LandRecordsDtoOne implements Serializable{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	
 	
 	
 	

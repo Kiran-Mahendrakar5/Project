@@ -52,40 +52,40 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean saveUserDetails(UserDto dto, Model model) throws Exception, NullPointerException {
-		if (dto.getMobileNumber() > 111111111) {
-			if (dto.getPassword().equals(dto.getConfirmPassword())) {
+			if (dto.getMobileNumber() > 111111111) {
+				if (dto.getPassword().equals(dto.getConfirmPassword())) {
 //				ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 //				Validator validator = factory.getValidator();
 //				Set<ConstraintViolation<UserDto>> violation = validator.validate(dto);
-				UserDto exist = emailExists(dto.getEmail());
-				UserDto pwdExist = passwordExists(dto.getPassword());
-				if (exist == null) {
-					if (pwdExist == null) {
-						String epwd = encryptPWD(dto.getPassword(), "ThisIsSecretKey");
-						System.out.println(epwd);
-						dto.setPassword(epwd);
-						dto.setConfirmPassword(epwd);
-						boolean save = Repo.saveUserDetails(dto);
-						System.out.println(save);
-						System.out.println("Data Validated");
-						return true;
+					UserDto exist = emailExists(dto.getEmail());
+					UserDto pwdExist = passwordExists(dto.getPassword());
+					if (exist == null) {
+						if (pwdExist == null) {
+							String epwd = encryptPWD(dto.getPassword(), "ThisIsSecretKey");
+							System.out.println(epwd);
+							dto.setPassword(epwd);
+							dto.setConfirmPassword(epwd);
+							boolean save = Repo.saveUserDetails(dto);
+							System.out.println(save);
+							System.out.println("Data Validated");
+							return true;
+						}
+						System.out.println("Your Password is Already Exist");
+						return false;
 					}
-					System.out.println("Your Password is Already Exist");
+					System.out.println("Your Email Account Already Exist");
+					return false;
+				} else {
+					model.addAttribute("ConfirmPassword", "Invalid Password, Check your password");
+					System.out.println("Invalid Password, Check your password");
 					return false;
 				}
-				System.out.println("Your Email Account Already Exist");
-				return false;
+
 			} else {
-				model.addAttribute("ConfirmPassword", "Invalid Password, Check your password");
-				System.out.println("Invalid Password, Check your password");
+				model.addAttribute("MobileNumber", "Invalid Mobile Number");
+				System.out.println("Mobile Number is not valid");
 				return false;
 			}
-		} else {
-			model.addAttribute("MobileNumber", "Invalid Mobile Number");
-			System.out.println("Mobile Number is not valid");
-			return false;
-		}
-
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
 						model.addAttribute("NotMatched", "Password is Not Matched");
 						System.out.println("wrong passward");
 						return null;
-						
+
 					}
 					model.addAttribute("Account", "Account not Found");
 					return null;
@@ -268,7 +268,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean updatePasswords(String password, String confirmPassword, String email, Model model) throws Exception {
+	public boolean updatePasswords(String password, String confirmPassword, String email, Model model)
+			throws Exception {
 		if (password != null && password.length() > 8 && password.length() <= 10) {
 			UserDto dto = ifExistss(email, confirmPassword, model);
 			if (confirmPassword != null && confirmPassword.equals(password)) {
@@ -355,29 +356,28 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto emailExists(String email) {
 		try {
-		UserDto eml = Repo.emailExists(email);
-		if (eml != null) {
-			return eml;
+			UserDto eml = Repo.emailExists(email);
+			if (eml != null) {
+				return eml;
+			}
+		} catch (Exception e) {
+			System.out.println("Email Exception Occured");
 		}
-	} catch (Exception e) {
-		System.out.println("Email Exception Occured");
+		return null;
+
 	}
-	return null;
-
-}
-
 
 	@Override
 	public UserDto passwordExists(String password) {
 		try {
-		UserDto pass = Repo.passwordExists(password);
-		if (pass != null) {
-			return pass;
+			UserDto pass = Repo.passwordExists(password);
+			if (pass != null) {
+				return pass;
+			}
+		} catch (Exception e) {
+			System.out.println("passward Exception Occured");
 		}
-	} catch (Exception e) {
-		System.out.println("passward Exception Occured");
-	}
-	return null;
+		return null;
 
-}
+	}
 }

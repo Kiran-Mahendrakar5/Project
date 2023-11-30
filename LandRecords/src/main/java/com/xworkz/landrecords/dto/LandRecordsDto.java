@@ -17,32 +17,35 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "LandRecordsDto_table")
+@Table(name = "Admin_table")
 @NamedQuery(name="findEmail" ,query = "select dto from LandRecordsDto dto where dto.email=:em")
 @NamedQuery(name = "updateOtp" ,query = "update LandRecordsDto dto set dto.otp=:op where dto.email=:eml")
 @NamedQuery(name="findOtp" ,query = "select dto from LandRecordsDto dto where dto.otp=:ot")
 public class LandRecordsDto implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String adminName;
 	private String email;
 	private String otp;
+	private String adminImage;
 	public LandRecordsDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public LandRecordsDto(int id, String adminName, String email, String otp) {
+	public LandRecordsDto(int id, String adminName, String email, String otp, String adminImage) {
 		super();
 		this.id = id;
 		this.adminName = adminName;
 		this.email = email;
 		this.otp = otp;
+		this.adminImage = adminImage;
 	}
 	@Override
 	public String toString() {
-		return "LandRecordsDto [id=" + id + ", adminName=" + adminName + ", email=" + email + ", otp=" + otp + "]";
+		return "LandRecordsDto [id=" + id + ", adminName=" + adminName + ", email=" + email + ", otp=" + otp
+				+ ", adminImage=" + adminImage + "]";
 	}
 	public int getId() {
 		return id;
@@ -68,9 +71,12 @@ public class LandRecordsDto implements Serializable {
 	public void setOtp(String otp) {
 		this.otp = otp;
 	}
+	public String getAdminImage() {
+		return adminImage;
+	}
+	public void setAdminImage(String adminImage) {
+		this.adminImage = adminImage;
+	}
 	
 	
-	
-	
-
 }

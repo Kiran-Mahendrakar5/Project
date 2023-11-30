@@ -1,5 +1,6 @@
 package com.xworkz.landrecords.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.xworkz.landrecords.dto.LandRecordsDto;
@@ -30,21 +32,41 @@ public class LandRecordsController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/send", method = RequestMethod.POST)
-	public String getMyMethod(LandRecordsDto dto, Model model) {
-		System.out.println(dto);
-		boolean status = service.save(dto, model);
-		if (status) {
-			model.addAttribute("save", dto);
-			return "Home";
-		} else {
-			return "Index";
+	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
+	public String save(LandRecordsDto dto, Model model, @RequestParam("file") MultipartFile file)
+			throws MultipartException, IllegalStateException, IOException {
+		String uploadPath = "C:\\Users\\Dell\\Desktop\\LandRecordImage\\";
+
+		String orgFileName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."),
+				file.getOriginalFilename().length());
+		String uniqueName = dto.getAdminName() + orgFileName;
+
+		System.out.println(uniqueName);
+		String name = uploadPath + uniqueName;
+
+		// Extracting the directory path without the file name
+		String directoryPath = name.substring(0, name.lastIndexOf(File.separator));
+
+		File directory = new File(directoryPath);
+		if (!directory.exists()) {
+			directory.mkdirs(); // This will create all necessary directories
 		}
 
+		dto.setAdminImage(uploadPath + uniqueName);
+
+		System.out.println("Received file: " + file.getOriginalFilename());
+
+		boolean saved = service.save(dto, model);
+		System.out.println(saved);
+
+		file.transferTo(new File(name));
+		return "Admin";
 	}
 
 	@RequestMapping(value = "/getOtp", method = RequestMethod.GET)
-	public String generateOtp(@RequestParam String email, Model model) {
+	public String generateOtp(@RequestParam String email, Model model, HttpSession session) {
+
+		session.setAttribute("email02", email);
 		System.out.println(email);
 		boolean result = service.signIn(email, model);
 		model.addAttribute("EmailV", email);
@@ -61,13 +83,15 @@ public class LandRecordsController {
 	}
 
 	@RequestMapping(value = "/checkOtp", method = RequestMethod.POST)
-	public String otpValidator(@RequestParam String otp, Model model) {
-		LandRecordsDto dto = service.otpValidator(otp, model);
-		System.out.println(dto);
-		if (dto != null) {
+	public String otpValidator(@RequestParam String otp, Model model, HttpSession session) {
+		String emailing = (String) session.getAttribute("email02");
+		LandRecordsDto dto1 = service.otpValidator(otp, model);
+		System.out.println(dto1);
+
+		if (dto1 != null) {
+			LandRecordsDto dto = service.findByEmail(emailing, model);
+			session.setAttribute("Admin", dto);
 			System.out.println("Otp is verified");
-			model.addAttribute("userName", dto.getAdminName());
-			model.addAttribute("otp", otp);
 
 			return "AddResolver";
 		} else {
@@ -177,6 +201,7 @@ public class LandRecordsController {
 			model.addAttribute("Login", "Login Successful");
 			return "ViewUser";
 		}
+		model.addAttribute("notLogIn", "Give Proper Credintials...!");
 		return "UserSignIn";
 	}
 
@@ -222,7 +247,6 @@ public class LandRecordsController {
 		return "UpdatePassward";
 	}
 
-
 	@RequestMapping(value = "/viewUser", method = RequestMethod.POST)
 	public String viewUser(@RequestParam String village, Model model) {
 		List<LandRecordsDtoOne> viewData = service.findByvillage(village);
@@ -248,7 +272,5 @@ public class LandRecordsController {
 		model.addAttribute("Reading", "No Records found");
 		return "ViewUser";
 	}
-	
-	
 
 }

@@ -104,7 +104,7 @@ public class LandRecordsServiceImpl implements LandRecordsService {
 			if (dto != null) {
 				String otp = generateOtp();
 				model.addAttribute("otpView", otp);
-				System.out.println("otp is a otp " + otp);
+				System.out.println("Your OTP " + otp);
 				boolean update = repo.updateOtpByEmail(otp, email);
 				System.out.println(update);
 				boolean sender = senderOtp(otp, email, model);

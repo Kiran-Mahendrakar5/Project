@@ -55,6 +55,18 @@ h1 {
 <br>
 <h3>Records of Rights, Tenancy & Crops (RTC) Form 16 | Mutation Register | Mutation Status | Bhoomi Online | Land Records 2023</h3>
 <br>
-<h1>SUCCESSFULLY LOGIN</h1>
+<h1>SUCCESSFULLY REGISTERED</h1>
+
+<footer
+				style="background-color: transparent; height: 10px; margin-top: 20px; text-align: center;"
+				class="footer">
+				<div class="container">
+					<p class="text-white" style="margin-top: 10px;">
+						Revenue Department<br> About | Govt Orders & Tenders | RTI
+						Act | Contact Us<br> Copyright © 2023 | Bhoomi Monitoring
+						Cell<br> Release Version: 1.0.0.0
+					</p>
+				</div>
+			</footer>
 </body>
 </html>

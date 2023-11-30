@@ -687,7 +687,17 @@ document.getElementById("post").addEventListener("change", function() {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     
- 
+ <footer
+				style="background-color: transparent; height: 10px; margin-top: 20px; text-align: center;"
+				class="footer">
+				<div class="container">
+					<p class="text-white" style="margin-top: 10px;">
+						Revenue Department<br> About | Govt Orders & Tenders | RTI
+						Act | Contact Us<br> Copyright © 2023 | Bhoomi Monitoring
+						Cell<br> Release Version: 1.0.0.0
+					</p>
+				</div>
+			</footer>
  
  
  

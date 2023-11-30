@@ -55,7 +55,10 @@
     text-decoration: none;
     color: white;
     font-size: 18px;
-    background: #007bff;
+    background-image: radial-gradient(circle at 30% 86%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
+                    radial-gradient(circle at 55% 100%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
+                    /* ... (your other gradients) ... */
+                    linear-gradient(135deg, rgb(23, 233, 173), rgb(29, 24, 208));
     padding: 10px 20px;
     border-radius: 5px;
     width: calc(33.33% - 25px); /* 3 boxes in a row with margins between them */
@@ -66,8 +69,11 @@
   }
 
   .centered-column .form {
-    background: #050ce4;
-    border: 2px solid #007bff;
+    background-image: radial-gradient(circle at 30% 86%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
+                    radial-gradient(circle at 55% 100%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 8%, transparent 8%, transparent 92%),
+                    /* ... (your other gradients) ... */
+                    linear-gradient(135deg, rgb(23, 233, 173), rgb(29, 24, 208));
+   
     border-radius: 5px;
     padding: 20px;
   }

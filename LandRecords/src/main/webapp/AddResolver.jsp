@@ -87,6 +87,7 @@
       top: -80px;
       font-size: 28px; /* Adjust the font size as needed */
     }
+    
   </style>
 </head>
 
@@ -101,10 +102,16 @@
     </ul>
   </div>
     <div class="content">
-    <span>WELCOME ${userName} To Karnataka Bhoomi Land Records RTC</span>
+    <span>WELCOME ${Admin.adminName} To Karnataka Bhoomi Land Records RTC</span>
   </div>
+  
+  
+
+
  
   <div class="centered-column">
+  <img alt="image" src="${Admin.adminImage}" class="custom-image-class" style="max-width: 150px; max-height: 100px; border: 2px solid black;">
+   
     <a href="Add.jsp">ADD RECORDS</a>
     <a href="OneRead.jsp">VIEW RECORDS</a>
   </div>

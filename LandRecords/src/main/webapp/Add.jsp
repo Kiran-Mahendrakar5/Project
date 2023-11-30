@@ -515,18 +515,24 @@ function populateDropdown(dropdown, options) {
       id="year"><br>
       
       <button type="submit" class="btn btn-primary" name="action"
-        value="addrecord">Add</button>
+        value="addrecord">Save</button>
       <button type="reset" class="btn btn-danger" name="action"
         value="addrecord">RESET</button>
     </form>
   </div>
 </div>
 
-<footer id="footerButton">
-  <p>
-    &copy; 2023 <a href="mailto:your-email@example.com">kiranms.xworkz@gmail.com</a>
-  </p>
-</footer>
+<footer
+				style="background-color: transparent; height: 10px; margin-top: 20px; text-align: center;"
+				class="footer">
+				<div class="container">
+					<p class="text-white" style="margin-top: 10px;">
+						Revenue Department<br> About | Govt Orders & Tenders | RTI
+						Act | Contact Us<br> Copyright © 2023 | Bhoomi Monitoring
+						Cell<br> Release Version: 1.0.0.0
+					</p>
+				</div>
+			</footer>
 
 </body>
 </html>

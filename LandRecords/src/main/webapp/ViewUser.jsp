@@ -650,7 +650,9 @@ color: #000;
 				<div class="col-md-3"
 					style="padding-right: 100px; padding-left: 100px">
 					<label class="form-lbl"> . </label>
-					<button type="submit" class="form-control btn btn-primary">Go</button>
+					
+					<button type="submit" class="form-control btn btn-primary">&#8680;</button>
+					
 				</div>
 			</div>
 
@@ -699,6 +701,19 @@ color: #000;
 
 				});
 	</script>
+	
+	
+	 <footer
+				style="background-color: transparent; height: 10px; margin-top: 20px; text-align: center;"
+				class="footer">
+				<div class="container">
+					<p class="text-white" style="margin-top: 10px;">
+						Revenue Department<br> About | Govt Orders & Tenders | RTI
+						Act | Contact Us<br> Copyright © 2023 | Bhoomi Monitoring
+						Cell<br> Release Version: 1.0.0.0
+					</p>
+				</div>
+			</footer>
 
 </body>
 </html>

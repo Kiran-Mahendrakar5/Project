@@ -252,7 +252,13 @@ body {
 
 						<form action="checkOtp" method="post" style="padding-left: 10px;">
 							<div class="form-group">
-								<label for="exampleInputPassword1">Enter OTP</label> <input
+							<input
+									type="hidden"   name="email"
+									 value="${email02}"
+									 >
+								<label for="exampleInputPassword1">Enter OTP</label>
+								
+								 <input
 									type="text" class="form-control" name="otp" value="${otpView}"
 									id="exampleInputPassword1"> <span class="text-danger"><h4>${otpValidated}</h4></span>
 							</div>

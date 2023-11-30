@@ -92,14 +92,14 @@ body {
 	<br>
 	<form action="update" method="get">
 		<div class="input-container">
-			<input type="text" name="ownerName" placeholder="ENTER OWNER NAME" style="background-color: transparent;">
-			<input type="number" name="mobileNumber"
+			<input type="text" name="ownerName" value="${param.ownerName}" placeholder="ENTER OWNER NAME" style="background-color: transparent;">
+			<input type="number" name="mobileNumber" value="${param.mobileNumber}" 
 				placeholder="ENTER MOBILE NUMBER" style="background-color: transparent;"> <input type="number"
-				name="aadharNumber" placeholder="ENTER AADHAR NUMBER" style="background-color: transparent;">
+				name="aadharNumber" value="${param.aadhaarNumber}"  placeholder="ENTER AADHAR NUMBER" style="background-color: transparent;">
 		</div>
 		<div class="input-container">
-			<input type="number" name="year" placeholder="ENTER YEAR" style="background-color: transparent;">
-			<input type="number" name="hissaNumber"
+			<input type="number" name="year" value="${param.year}" placeholder="ENTER YEAR" style="background-color: transparent;">
+			<input type="number" name="hissaNumber" 
 				placeholder="ENTER HISSA NUMBER" style="background-color: transparent;"> <input type="number"
 				name="serveNumber" placeholder="ENTER SERVE NUMBER" style="background-color: transparent;">
 		</div>
@@ -111,5 +111,6 @@ body {
 		</div>
 	</form>
 	</div>
+	
 </body>
 </html>
